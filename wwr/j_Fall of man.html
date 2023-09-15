@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Fall of Man</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+  }
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+  .highlight {
+    background-color: #ffcc80; /* Highlight color */
+  }
+  button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+  p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #666;
+  }
+</style>
+<title>Talk: The Fall of Man</title>
+</head>
+<body>
+  <div class="container">
+    <h1>The Fall of Man</h1>
+    <p>Dear brothers and sisters, today we gather to discuss a pivotal event in human history, the Fall of Man. As it is written in the Book of Mormon, "Adam fell that men might be; and men are, that they might have joy" (2 Nephi 2:25). This foundational narrative, found in the scriptures of The Church of Jesus Christ of Latter-day Saints and supported by the Bible, serves as a cornerstone of our understanding of mortality and the plan of salvation. The Fall, while often associated with the introduction of sin and suffering into the world, also carries profound lessons of growth, agency, and the Atonement of Jesus Christ.</p>
+    <p>From the outset, our Heavenly Father designed a plan that would enable His children to experience mortality and progress toward becoming like Him. As the apostle Paul wrote in the Bible, "For as in Adam all die, even so in Christ shall all be made alive" (1 Corinthians 15:22). Central to this plan was the Garden of Eden, where Adam and Eve were placed, giving them the freedom to choose between good and evil. Their choice to partake of the forbidden fruit was not a surprise to God but a necessary step for the plan to unfold, allowing us to exercise agency and learn from our experiences.</p>
+    <p>With their choice, Adam and Eve experienced a spiritual and physical separation from God, symbolizing the entrance of sin and mortality into the world. This event was not a punishment, but rather a natural outcome of their decision. As the Book of Mormon teaches, "Adam did fall by the partaking of the forbidden fruit, according to the word of God; and thus we see, that by his fall, all mankind became a lost and fallen people" (Helaman 14:16). This emphasizes the universal effect of the Fall and our shared need for a Savior.</p>
+    <p>The Fall highlighted the importance of accountability. Adam and Eve became accountable for their actions and faced the consequences. This is a pattern that continues in our lives. We, too, are accountable for our choices, but just as with our first parents, the Fall offers us opportunities for growth and learning. Through the challenges and trials of mortality, we can develop attributes that will help us draw nearer to God.</p>
+    <p>While the Fall brought hardships, it also brought forth incredible blessings. Through experiencing mortality, we gain bodies, which allow us to learn, progress, and develop godly attributes. As the Bible teaches, "Know ye not that ye are the temple of God, and that the Spirit of God dwelleth in you?" (1 Corinthians 3:16). We can form families, make meaningful connections, and experience joy. The journey of mortality is an integral part of our eternal progression.</p>
+    <p>The most profound consequence of the Fall is our need for a Savior. Jesus Christ willingly took upon Himself the sins and sorrows of the world. His Atonement provides the way for us to overcome the spiritual and physical separation from God that resulted from the Fall. As the Book of Mormon testifies, "And he shall go forth, suffering pains and afflictions and temptations of every kind; and this that the word might be fulfilled which saith he will take upon him the pains and the sicknesses of his people" (Alma 7:11). Through repentance and faith in Christ, we can be forgiven, cleansed, and reconciled with our Heavenly Father.</p>
+    <p>The Fall underscores the importance of agency, a divine gift given to us by our Heavenly Father. Without the ability to choose between good and evil, our progression would be limited. The Fall ensured that agency would be an essential aspect of our mortal experience, allowing us to exercise our will in alignment with God's plan. As the Book of Mormon teaches, "Wherefore, men are free according to the flesh; and all things are given them which are expedient unto man. And they are free to choose liberty and eternal life, through the great Mediator of all men, or to choose captivity and death, according to the captivity and power of the devil" (2 Nephi 2:27).</p>
+    <p>In conclusion, the Fall of Man is a fundamental doctrine that shapes our understanding of mortality, agency, and the Atonement of Jesus Christ. It reminds us that growth often comes through challenges and choices. As we navigate this mortal journey, let us remember that the Fall was a necessary step in our eternal progression. By embracing the blessings and lessons it offers, we can find meaning, purpose, and ultimately draw closer to our loving Heavenly Father. May we strive to make choices that align with His plan, relying on the Savior's Atonement to overcome our weaknesses and return to His presence. In the name of Jesus Christ, amen.</p>
+  </div>
+  <button id="readButton">Read</button>
+    <script>
+        let paragraphs = document.querySelectorAll('.container p, .container h1');
+        let currentIndex = 0;
+        let currentWordIndex = 0;
+        let reading = false;
+        let synth = window.speechSynthesis;
+
+        document.getElementById('readButton').addEventListener('click', function() {
+            if (!reading) {
+                reading = true;
+                this.innerText = 'Stop';
+                readParagraphs();
+            } else {
+                reading = false;
+                this.innerText = 'Read';
+                resetParagraphs();
+                synth.cancel(); // Stop speech synthesis
+            }
+        });
+
+        function readParagraphs() {
+            if (currentIndex < paragraphs.length && reading) {
+                paragraphs[currentIndex].classList.add('highlight'); // Highlight the element being read
+                paragraphs[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' }); // Scroll to the element
+                let text = paragraphs[currentIndex].textContent;
+                let words = text.split(' '); // Split the text into words
+                let utterance = new SpeechSynthesisUtterance(text);
+                utterance.onboundary = function(event) {
+                    if (event.name === 'word') {
+                        highlightWord(currentWordIndex);
+                        currentWordIndex++;
+                    }
+                };
+                utterance.onend = function() {
+                    paragraphs[currentIndex].classList.remove('highlight'); // Remove the highlight after reading
+                    currentWordIndex = 0;
+                    currentIndex++;
+                    readParagraphs(); // Read next element
+                };
+                utterance.onerror = function(event) {
+                    console.error('An error occurred while processing the speech synthesis:', event.error);
+                    currentIndex++;
+                    readParagraphs(); // Continue to the next element
+                };
+                synth.speak(utterance); // Start speech synthesis
+            } else {
+                currentIndex = 0;
+                currentWordIndex = 0;
+                resetParagraphs();
+            }
+        }
+
+        function highlightWord(index) {
+            paragraphs[currentIndex].innerHTML = paragraphs[currentIndex].innerHTML.replace(/<\/?mark>/g, ''); // Remove existing highlights
+            let words = paragraphs[currentIndex].textContent.split(' ');
+            if (words[index] !== undefined) {
+                words[index] = `<mark>${words[index]}</mark>`; // Wrap the word in <mark> tags
+                paragraphs[currentIndex].innerHTML = words.join(' '); // Update the paragraph content
+            }
+        }
+
+        function resetParagraphs() {
+            paragraphs.forEach(paragraph => {
+                paragraph.classList.remove('highlight');
+                paragraph.innerHTML = paragraph.textContent; // Reset paragraph content to remove highlights
+            });
+        }
+    </script>
+</body>
+</html>

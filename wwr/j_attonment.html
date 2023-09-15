@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Atonement of Jesus Christ: Redeeming Love and Eternal Hope</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+          }
+          .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+          }
+          body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+          }
+          .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+          }
+          h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+          }
+          p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+          }
+          .highlight {
+            background-color: #ffcc80; /* Highlight color */
+          }
+          button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+          }
+          h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+          }
+          p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+          }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+
+        <h1>The Atonement of Jesus Christ: Redeeming Love and Eternal Hope</h1>
+
+        <p>Dear friends,</p>
+
+        <p>At the heart of our faith rests the profound principle of the Atonement of Jesus Christ. It is the central pillar of the plan of salvation—an eternal offering of love and redemption that bridges the gap between humanity and divinity. The Atonement encompasses Christ's suffering in the Garden of Gethsemane, His crucifixion on Calvary, and His glorious resurrection.</p>
+
+        <p>The scriptures reveal the depth of Christ's sacrifice. The Apostle Paul eloquently states, "For as in Adam all die, even so in Christ shall all be made alive" (<span class="highlight">1 Corinthians 15:22</span>). Through the Atonement, the Savior triumphed over death, offering the gift of resurrection to all. His victory over the grave is our assurance of eternal life—a gift bestowed upon us through His mercy and grace.</p>
+
+        <p>In the Garden of Gethsemane, Christ took upon Himself the sins, pains, and afflictions of the world. This selfless act demonstrated His perfect love and unwavering commitment to each of us. The weight of our sins caused Him to "suffer pains and afflictions and temptations of every kind" so that He could comprehend and succor us in our infirmities (<span class="highlight">Alma 7:11-12</span>).</p>
+
+        <p>On the cross at Calvary, the Savior cried out, "Father, forgive them; for they know not what they do" (<span class="highlight">Luke 23:34</span>). This expression of compassion and forgiveness encapsulates the essence of the Atonement. It is through Christ's sacrifice that we find forgiveness for our sins as we exercise faith in Him, repent, and partake of the sacrament in remembrance of His sacrifice.</p>
+
+        <p>Additionally, the Atonement brings healing to our wounded souls. The Savior's atoning blood not only cleanses us from sin but also provides solace for our sorrows, strength for our weaknesses, and hope for our despair. As we come unto Him, He binds up our broken hearts and brings the peace that surpasses all understanding.</p>
+
+        <p>Furthermore, the Atonement empowers us to become new creatures in Christ. The Apostle Paul declared, "If any man be in Christ, he is a new creature: old things are passed away; behold, all things are become new" (<span class="highlight">2 Corinthians 5:17</span>). Through His grace, we can overcome weaknesses, rise above challenges, and progress along the path of discipleship.</p>
+
+        <p>In conclusion, the Atonement of Jesus Christ is the foundation of our faith—a testament to His infinite love, mercy, and sacrifice. It is through His redeeming blood that we find hope, forgiveness, and the opportunity to be reconciled with our Heavenly Father. The Atonement is a gift beyond measure—a divine bridge that connects us to God and paves the way for our eternal progression.</p>
+
+        <p>Thank you for joining me in this reflection on the Atonement. May we ever remember and honor the Savior's sacrifice, seeking to live in accordance with His teachings and embracing the transformative power of His redeeming love.</p>
+        <p><a href="#">Learn more about the Atonement of Jesus Christ</a></p>
+    </div>
+<button id="readButton">Read</button>
+    <script>
+        let paragraphs = document.querySelectorAll('.container p, .container h1');
+        let currentIndex = 0;
+        let currentWordIndex = 0;
+        let reading = false;
+        let synth = window.speechSynthesis;
+
+        document.getElementById('readButton').addEventListener('click', function() {
+            if (!reading) {
+                reading = true;
+                this.innerText = 'Stop';
+                readParagraphs();
+            } else {
+                reading = false;
+                this.innerText = 'Read';
+                resetParagraphs();
+                synth.cancel(); // Stop speech synthesis
+            }
+        });
+
+        function readParagraphs() {
+            if (currentIndex < paragraphs.length && reading) {
+                paragraphs[currentIndex].classList.add('highlight'); // Highlight the element being read
+                paragraphs[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' }); // Scroll to the element
+                let text = paragraphs[currentIndex].textContent;
+                let words = text.split(' '); // Split the text into words
+                let utterance = new SpeechSynthesisUtterance(text);
+                utterance.onboundary = function(event) {
+                    if (event.name === 'word') {
+                        highlightWord(currentWordIndex);
+                        currentWordIndex++;
+                    }
+                };
+                utterance.onend = function() {
+                    paragraphs[currentIndex].classList.remove('highlight'); // Remove the highlight after reading
+                    currentWordIndex = 0;
+                    currentIndex++;
+                    readParagraphs(); // Read next element
+                };
+                utterance.onerror = function(event) {
+                    console.error('An error occurred while processing the speech synthesis:', event.error);
+                    currentIndex++;
+                    readParagraphs(); // Continue to the next element
+                };
+                synth.speak(utterance); // Start speech synthesis
+            } else {
+                currentIndex = 0;
+                currentWordIndex = 0;
+                resetParagraphs();
+            }
+        }
+
+        function highlightWord(index) {
+            paragraphs[currentIndex].innerHTML = paragraphs[currentIndex].innerHTML.replace(/<\/?mark>/g, ''); // Remove existing highlights
+            let words = paragraphs[currentIndex].textContent.split(' ');
+            if (words[index] !== undefined) {
+                words[index] = `<mark>${words[index]}</mark>`; // Wrap the word in <mark> tags
+                paragraphs[currentIndex].innerHTML = words.join(' '); // Update the paragraph content
+            }
+        }
+
+        function resetParagraphs() {
+            paragraphs.forEach(paragraph => {
+                paragraph.classList.remove('highlight');
+                paragraph.innerHTML = paragraph.textContent; // Reset paragraph content to remove highlights
+            });
+        }
+    </script>
+<footer>
+    <div class="footer">
+        <h2>Talks</h2>
+        <ul>
+            <li><a href="j_attonment.html">Learn more about the Atonement</a></li>
+            <li><a href="j_plan_salvation.html">The Plan of Salvation </a></li>
+            <li><a href="j_charity.html">Charity and Loving Service </a></li>
+            <li><a href="j_love.html">The Principle of Faith </a></li>
+            <li><a href="j_Responsibility.html">Work and Responsibility</a></li>
+            <li><a href="j_restoration.html">The Restoration of Truth </a></li>
+            <li><a href="j_baptism.html">Baptism</a></li>
+            <li><a href="j_robot.html">speaking j_robot</a></li>
+            <li><a href="j_love_neighbor.html">Love for Our Neighbor </a></li>
+            <li><a href="j_holy_ghost.html">The Holy Ghost as Your Companion</a></li>
+            <li><a href="j_testimony.html">Talk about Testimony</a></li>
+            <li><a href="j_testimoney.html">Testimony</a></li>
+            <li><a href="j_christlike.html">Christ-like Attributes</a></li>
+            <li><a href="j_repentance.html">The Gift of Repentance</a></li>
+        </ul>
+    </div>
+    <p class="copyright">© 2023 rayonsdjibouti. All rights reserved.</p>
+
+</footer>
+
+</body>
+</html>

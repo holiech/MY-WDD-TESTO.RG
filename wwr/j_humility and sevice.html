@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Humility and sevice</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+  }
+  .container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .highlight {
+    background-color: #ffcc80; /* Highlight color */
+  }
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+  p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #666;
+  }
+  .verse {
+    color: #0066cc; /* Change this color to your preferred color */
+    font-weight: bold;
+  }
+</style>
+<title>Talk: Humility and Service</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Embracing Humility and Service</h1>
+    <p>Dear brothers and sisters, today we come together to explore two intertwined virtues that lie at the heart of our faith: humility and service. In the words of the Book of Mormon, "<span class="verse">And if men come unto me I will show unto them their weakness. I give unto men weakness that they may be humble; and my grace is sufficient for all men that humble themselves before me</span>" (Ether 12:27).</p>
+    <p>Humility is a trait exemplified by the Savior Himself. He, who had all power, knelt and washed the feet of His disciples. His life serves as a profound example of selflessness, kindness, and the willingness to lower oneself for the betterment of others. As we learn from the scriptures, "<span class="verse">Whosoever will be great among you, let him be your minister; and whosoever will be chief among you, let him be your servant</span>" (Matthew 20:26-27).</p>
+    <p>Service, the natural outgrowth of humility, is a divine principle that binds us together as a community of believers. We are taught that "<span class="verse">when ye are in the service of your fellow beings, ye are only in the service of your God</span>" (Mosiah 2:17). Service provides us with opportunities to extend Christlike love to those around us, whether through a simple act of kindness or by devoting our time and talents to those in need.</p>
+    <p>Embracing humility and service requires a genuine recognition of our own dependence on God and the understanding that all that we have comes from Him. By developing a humble heart, we open ourselves to the influence of the Holy Spirit, which guides us in our efforts to serve and bless others. As we read in the Doctrine and Covenants, "<span class="verse">Be thou humble; and the Lord thy God shall lead thee by the hand, and give thee answer to thy prayers</span>" (D&amp;C 112:10).</p>
+    <p>It's important to acknowledge that embracing humility and service isn't always easy. Our modern world often encourages self-promotion and individualism. Yet, as followers of Christ, we are called to a higher standard. Through our humility and service, we can bring the light of the gospel into the lives of those we touch. Even a small act of kindness can have a ripple effect, inspiring others to follow in Christ's footsteps.</p>
+    <p>As we strive to become more humble and to serve with genuine love, we align ourselves with the teachings of our Savior. By doing so, we become true disciples of Christ, fulfilling His charge to "<span class="verse">love one another; as I have loved you</span>" (John 13:34). Let us remember that our acts of service, no matter how small, contribute to the building of God's kingdom on earth.</p>
+    <p>Let us go forth and apply the principles of humility and service in our daily lives, seeking opportunities to lift and strengthen those around us. By doing so, we become instruments in the hands of God, spreading His love and light to a world in need. May our hearts be filled with gratitude for the Savior's perfect example, and may we emulate His compassion and grace as we serve and love one another.</p>
+    <p>In conclusion, humility and service are not just admirable qualities; they are essential aspects of our discipleship. By humbling ourselves before God and serving His children, we emulate the perfect example set by Jesus Christ. Let us heed the call to serve with pure hearts and open hands, knowing that through our efforts, we can make a difference in the lives of others and draw closer to our Heavenly Father. May we strive to be humble servants, following the Savior's path of selflessness and love. In the name of Jesus Christ, amen.</p>
+
+    <button id="readButton">Read</button>
+    <script>
+        let paragraphs = document.querySelectorAll('.container p, .container h1');
+        let currentIndex = 0;
+        let currentWordIndex = 0;
+        let reading = false;
+        let synth = window.speechSynthesis;
+
+        document.getElementById('readButton').addEventListener('click', function() {
+            if (!reading) {
+                reading = true;
+                this.innerText = 'Stop';
+                readParagraphs();
+            } else {
+                reading = false;
+                this.innerText = 'Read';
+                resetParagraphs();
+                synth.cancel(); // Stop speech synthesis
+            }
+        });
+
+        function readParagraphs() {
+            if (currentIndex < paragraphs.length && reading) {
+                paragraphs[currentIndex].classList.add('highlight'); // Highlight the element being read
+                paragraphs[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' }); // Scroll to the element
+                let text = paragraphs[currentIndex].textContent;
+                let words = text.split(' '); // Split the text into words
+                let utterance = new SpeechSynthesisUtterance(text);
+                utterance.onboundary = function(event) {
+                    if (event.name === 'word') {
+                        highlightWord(currentWordIndex);
+                        currentWordIndex++;
+                    }
+                };
+                utterance.onend = function() {
+                    paragraphs[currentIndex].classList.remove('highlight'); // Remove the highlight after reading
+                    currentWordIndex = 0;
+                    currentIndex++;
+                    readParagraphs(); // Read next element
+                };
+                utterance.onerror = function(event) {
+                    console.error('An error occurred while processing the speech synthesis:', event.error);
+                    currentIndex++;
+                    readParagraphs(); // Continue to the next element
+                };
+                synth.speak(utterance); // Start speech synthesis
+            } else {
+                currentIndex = 0;
+                currentWordIndex = 0;
+                resetParagraphs();
+            }
+        }
+
+        function highlightWord(index) {
+            paragraphs[currentIndex].innerHTML = paragraphs[currentIndex].innerHTML.replace(/<\/?mark>/g, ''); // Remove existing highlights
+            let words = paragraphs[currentIndex].textContent.split(' ');
+            if (words[index] !== undefined) {
+                words[index] = `<mark>${words[index]}</mark>`; // Wrap the word in <mark> tags
+                paragraphs[currentIndex].innerHTML = words.join(' '); // Update the paragraph content
+            }
+        }
+
+        function resetParagraphs() {
+            paragraphs.forEach(paragraph => {
+                paragraph.classList.remove('highlight');
+                paragraph.innerHTML = paragraph.textContent; // Reset paragraph content to remove highlights
+            });
+        }
+    </script>
+  </div>
+</body>
+</html>

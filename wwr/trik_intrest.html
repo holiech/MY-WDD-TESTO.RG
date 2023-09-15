@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <a href="trips.html">back</a>
+    <h3> ON UPDATE........ BUT YOU CALL FOR ANY CLARIFICATON</h3>
+    <h1>Interest and Loans Table</h1>
+    <table id="interestLoanTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>January</th>
+                <th>February</th>
+                <th>March</th>
+                <th>April</th>
+                <th>May</th>
+                <th>June</th>
+                <th>July</th>
+                <th>August</th>
+                <th>September</th>
+                <th>October</th>
+                <th>November</th>
+                <th>December</th>
+                <th>Total Interest</th> <!-- New column for total interest -->
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        // Sample data for ten people
+        const data = [          //j f  m  a  M   j  J  A  S  O  N  D
+    { name: "Clifford", values: [0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0] },
+    { name: "Shem", values:     [0, 0, 0, 100, 0, 20, 0, 0, 0, 0, 0, 0] },
+    { name: "Bornbray", values: [0, 0, 100, 100, 0, 20, 0, 0, 0, 0, 0, 0] },
+    { name: "Samuel", values:   [0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0] },
+    { name: "PeterAT", values:    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+    { name: "Raila", values:    [0, 0, 100, 100, 0, 0, 0, 0, 0, 0, 0, 0] },
+    { name: "Peter", values:    [0, 0, 100, 0, 0, 0, 0, 0, 200, 0, 0, 0] },
+    { name: "John", values:     [0, 0, 200, 200, 0, 0, 0, 0, 0, 0, 0, 0] },
+    { name: "Billy", values:    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+    { name: "Phelix", values:   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+    { name: "Audrey", values:   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+    { name: "Meshark", values:  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+    { name: "Cynthia", values:  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+    { name: "Zaddock", values:  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+    { name: "Javan", values:    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+    { name: "Edwin", values:    [0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+    { name: "Devid", values:    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+    { name: "Isaac", values:    [0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+    { name: "Stive", values:    [0, 0, 0, 80, 0, 0, 0, 0, 0, 0, 0, 0] }
+];
+
+
+        // Function to calculate the total interest for each person
+        function calculateTotalInterest(values) {
+            return values.reduce((total, value) => total + value, 0);
+        }
+
+        // Function to create the table rows dynamically
+        function createTable() {
+            const tableBody = document.querySelector("#interestLoanTable tbody");
+
+            data.forEach(person => {
+                const row = document.createElement("tr");
+                row.innerHTML = `<td>${person.name}</td>`;
+                person.values.forEach(value => {
+                    row.innerHTML += `<td>${value}</td>`;
+                });
+
+                const totalInterest = calculateTotalInterest(person.values);
+                row.innerHTML += `<td>${totalInterest}</td>`; // Add total interest column
+
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Call the function to create the table
+        createTable();
+    </script>
+</body>
+</html>

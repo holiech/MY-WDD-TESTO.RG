@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles/contacts.css">
+  <title>Contact Us</title>
+</head>
+<body>
+  <header>
+    <div><img src="images/logos.png" alt="logo"></div>
+    <nav>
+      <a href="page.html">Page</a>
+      <a href="about.html">About Us</a>
+      <a href="home.html">Home</a>
+      <a href="contuct.html">Contact Us</a>
+      <a href="game.html"> Games</a>
+    </nav>
+  </header>
+
+  <h1>Contact Us</h1>
+  <p>You can reach out to us via the following methods:</p>
+  <ul>
+    <li>Email: info@example.com</li>
+    <li>Phone: +1 9123-456-7890</li>
+    <li>Address: 123 Main Street, City, Country</li>
+  </ul>
+
+  <h2>Contact Person</h2>
+  <p>If you have any specific inquiries, you can contact our friendly representative:</p>
+  <ul>
+    <li>Name: Johhn Doe</li>
+    <li>Email: john.doe@example.com</li>
+    <li>Phone: +1 987-654-3210</li>
+  </ul>
+
+  <h2>Send Us a Message</h2>
+  <form action="#" method="POST">
+    <label for="name">Your Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Your Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="topic">Choose a Topic:</label>
+    <div>
+      <input type="radio" id="general" name="topic" value="general" checked>
+      <label for="general">General Inquiry</label>
+    </div>
+    <div>
+      <input type="radio" id="support" name="topic" value="support">
+      <label for="support">Support</label>
+    </div>
+    <div>
+      <input type="radio" id="feedback" name="topic" value="feedback">
+      <label for="feedback">Feedback</label>
+    </div>
+
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" rows="4" required></textarea>
+
+    <button type="submit">Send Message</button>
+  </form>
+
+  <h2>Our Location</h2>
+  <p>You can find us at the following address:</p>
+  <p>123 Main Street, City, Country</p>
+
+  <div id="map">
+    <!-- Add your map embed code here (Google Maps, OpenStreetMap, etc.) -->
+    <!-- Replace the placeholder below with the actual map embed code -->
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d112263.71781155175!2d-122.41941544259198!3d37.77492999770143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808f8fbf22ec8a85%3A0xc4029a6e38ddaec1!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1611021634994!5m2!1sen!2sus" width="400" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div>
+        <h3>Investments KE.U</h3>
+        <p>Etsy sartorial godard wolf pok pok swag kale chips chia normcore, tbh tousled four loko woke. Ethical stumptown man braid franzen.</p>
+      </div>
+      <div>
+        <h3>CONTACT INFO</h3>
+        <p>Avenue Kanairo, CA, Ndjbouti</p>
+        <p>Monday – Friday: 9:00am – 9:00pm</p>
+        <p>* (555) 000-345</p>
+        <p>* (8080) 9797-8989</p>
+        <p>D-PESA.com</p>
+      </div>
+      <div>
+        <h3>QUIK LINKS</h3>
+        <ul>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Investment Blog</a></li>
+          <li><a href="#">Inspiring Minds</a></li>
+          <li><a href="#">Meeting Calendar</a></li>
+          <li><a href="#">Our Team’s Policies</a></li>
+          <li><a href="#">Sitemap</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>INFORMATION ABOUT</h3>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="game.html">game</a></li>
+          <li><a href="#">Meet our Team</a></li>
+          <li><a href="#">Transport</a></li>
+          <li><a href="#">Athletics</a></li>
+          <li><a href="#">tours</a></li>
+          <li><a href="#">Apps</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">
+      &copy; rayonsdjibouti
+    </p>
+  </footer>
+  
+  <script>
+    const contactForm = document.getElementById("contactForm");
+    const thankYouMessage = document.getElementById("thankYouMessage");
+
+    contactForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      // Here you can add the code to handle the form submission (e.g., sending the form data to the server)
+      // For this example, we'll simply show the thank you message after a brief delay (2 seconds)
+      thankYouMessage.style.display = "block";
+      setTimeout(function () {
+        contactForm.reset();
+        thankYouMessage.style.display = "none";
+      }, 2000);
+    });
+  </script>
+
+  <a href="home.html"><button>Back to Home</button></a>
+</body>
+</html>

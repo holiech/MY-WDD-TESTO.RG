@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Loan Summary Table</title>
+    <link rel="stylesheet" href="styles/register.css">
+    <style>
+      /* Your CSS styles go here */
+
+      /* CSS styles for positioning the form container */
+      .slideshow-container {
+        position: relative;
+      }
+
+      .login-form-container, .create-account-form-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #ffffff;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        display: none;
+      }
+
+      .visible {
+        display: block;
+      }
+    </style>
+</head>
+<body>
+  <header>
+    <!-- Your header content goes here -->
+  </header>
+
+  <main>
+    <div class="slideshow-container">
+      <div>
+        <img src="images/fam_10.jpg" alt="Slide 1">
+        <div class="slide-text">
+          <h2>Discover Lucrative Investment Opportunities</h2>
+          <p>Unlock the potential for remarkable returns. Our team of financial experts diligently research and identify promising investment opportunities.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Registration and Login Forms -->
+    <div class="registration-button-container">
+      <!-- "Register Now" link to toggle the create account form -->
+      <a href="#" class="register-button" onclick="toggleCreateAccountForm()">Register Now</a>
+    </div>
+
+    <!-- Login form -->
+    <div class="login-form-container" id="loginFormContainer">
+      <form id="loginForm" onsubmit="handleLoginFormSubmission(event)">
+        <h2>Member Login</h2>
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+          <a href="#" id="forgotPasswordLink" onclick="handleForgotPassword()">Forgot Password</a>
+          <a href="#" id="forgotUsernameLink" onclick="handleForgotUsername()">Forgot Username</a>
+        </div>
+        <div class="form-group">
+          <button type="submit">Login</button>
+        </div>
+      </form>
+      <!-- "Create Account" link to toggle the create account form -->
+      <a href="#" class="login-link" onclick="toggleCreateAccountForm()">Create Account</a>
+    </div>
+
+    <!-- Create Account Form -->
+    <div class="create-account-form-container" id="createAccountFormContainer">
+      <form id="createAccountForm" onsubmit="createAccount(event)">
+        <h2>Create Account</h2>
+        <div class="form-group">
+          <label for="newUsername">New Username:</label>
+          <input type="text" id="newUsername" name="newUsername" required>
+        </div>
+        <div class="form-group">
+          <label for="newPassword">New Password:</label>
+          <input type="password" id="newPassword" name="newPassword" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <button type="submit">Create Account</button>
+        </div>
+      </form>
+      <!-- "Login" link to toggle the login form -->
+      <a href="#" class="login-link" onclick="toggleLoginForm()">Login</a>
+    </div>
+  </main>
+
+  <footer>
+    <!-- Your footer content goes here -->
+  </footer>
+
+  <script>
+    // Function to get the accessPasswords dictionary from local storage (or create an empty one if it doesn't exist)
+    function getAccessPasswords() {
+      const passwordsJSON = localStorage.getItem("accessPasswords");
+      return passwordsJSON ? JSON.parse(passwordsJSON) : {};
+    }
+
+    // Function to save the accessPasswords dictionary to local storage
+    function saveAccessPasswords(accessPasswords) {
+      const passwordsJSON = JSON.stringify(accessPasswords);
+      localStorage.setItem("accessPasswords", passwordsJSON);
+    }
+
+    // Function to get the emailPasswords dictionary from local storage (or create an empty one if it doesn't exist)
+    function getEmailPasswords() {
+      const emailPasswordsJSON = localStorage.getItem("emailPasswords");
+      return emailPasswordsJSON ? JSON.parse(emailPasswordsJSON) : {};
+    }
+
+    // Function to save the emailPasswords dictionary to local storage
+    function saveEmailPasswords(emailPasswords) {
+      const emailPasswordsJSON = JSON.stringify(emailPasswords);
+      localStorage.setItem("emailPasswords", emailPasswordsJSON);
+    }
+
+    // Function to toggle the login form visibility
+    function toggleLoginForm() {
+      const loginFormContainer = document.getElementById("loginFormContainer");
+      loginFormContainer.classList.toggle("visible");
+      const createAccountFormContainer = document.getElementById("createAccountFormContainer");
+      createAccountFormContainer.classList.remove("visible");
+    }
+
+    // Function to handle the login form submission
+    function handleLoginFormSubmission(event) {
+      event.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      const accessPasswords = getAccessPasswords();
+
+      if (accessPasswords.hasOwnProperty(password) && accessPasswords[password].username === username) {
+        console.log(`Login successful for ${username}! Redirecting to Account page...`);
+        alert(`Login successful for ${username}! Redirecting to Account page...`);
+        window.location.href = "trip.html"; // Replace "home.html" with the actual URL of your home page
+      } else {
+        console.log("Invalid username or password.");
+        alert("Invalid username or password.");
+      }
+    }
+
+    // Function to handle the "Forgot Password" link
+    function handleForgotPassword() {
+      const email = prompt("Please enter your email address:");
+      const emailPasswords = getEmailPasswords();
+
+      if (emailPasswords.hasOwnProperty(email)) {
+        const password = emailPasswords[email].password;
+        const username = emailPasswords[email].username;
+        alert(`Your password is: ${password}`);
+      } else {
+        alert("Email address not found. Please check and try again.");
+      }
+    }
+
+    // Function to handle the "Forgot Username" link
+    function handleForgotUsername() {
+      const email = prompt("Please enter your email address:");
+      const emailPasswords = getEmailPasswords();
+
+      if (emailPasswords.hasOwnProperty(email)) {
+        const username = emailPasswords[email].username;
+        alert(`Your username is: ${username}`);
+      } else {
+        alert("Email address not found. Please check and try again.");
+      }
+    }
+
+    // Function to toggle the create account form visibility
+    function toggleCreateAccountForm() {
+      const createAccountFormContainer = document.getElementById("createAccountFormContainer");
+      createAccountFormContainer.classList.toggle("visible");
+      const loginFormContainer = document.getElementById("loginFormContainer");
+      loginFormContainer.classList.remove("visible");
+    }
+
+    // Function to handle the create account form submission
+    function createAccount(event) {
+      event.preventDefault();
+      const newUsername = document.getElementById("newUsername").value;
+      const newPassword = document.getElementById("newPassword").value;
+      const email = document.getElementById("email").value;
+      const accessPasswords = getAccessPasswords();
+      const emailPasswords = getEmailPasswords();
+
+      if (accessPasswords.hasOwnProperty(newPassword) || emailPasswords.hasOwnProperty(email)) {
+        alert("Username or email already exists. Please choose a different username and email.");
+        return;
+      }
+
+      accessPasswords[newPassword] = { username: newUsername, email: email };
+      emailPasswords[email] = { username: newUsername, password: newPassword };
+      saveAccessPasswords(accessPasswords);
+      saveEmailPasswords(emailPasswords);
+
+      console.log("Account created successfully!");
+      alert("Account created successfully!");
+      // Clear the create account form fields after successful account creation
+      document.getElementById("newUsername").value = "";
+      document.getElementById("newPassword").value = "";
+      document.getElementById("email").value = "";
+    }
+
+    // Event listeners for the login form and create account form
+    document.getElementById("loginForm").addEventListener("submit", handleLoginFormSubmission);
+    document.getElementById("createAccountForm").addEventListener("submit", createAccount);
+  </script>
+</body>
+</html>

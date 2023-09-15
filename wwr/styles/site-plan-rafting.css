@@ -1,0 +1,117 @@
+
+@import url('https://fonts.googleapis.com/css2?family=font-name&family=optional-2nd-font-name&display=swap');
+
+:root {
+  --primary-color: steelblue;
+  --secondary-color: rgb(96, 128, 0);
+  --accent1-color: lightgreen;
+  --accent2-color: pink;
+
+  --heading-font: Times New Roman, serif;
+  --paragraph-font: Georgia, serif;
+
+  --nav-background-color: steelblue;
+  --nav-link-color: #ffffff;
+  --nav-hover-link-color: hotpink;
+  --nav-hover-background-color: green;
+}
+
+        
+body {
+  font-family: var(--paragraph-font);
+  max-width: 960px;
+  padding: 20px;
+}
+
+        
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--heading-font);
+  color: var(--primary-color);
+}
+
+header {
+  padding: 20px;
+  background-color: var(--accent1-color);
+}
+
+
+p {
+  padding: 25px;
+}
+
+
+nav {
+  background-color: var(--nav-background-color);
+  font-size: 1.2rem;
+  display: flex;
+}
+
+nav a {
+  display: block;
+  color: var(--nav-link-color);
+  text-decoration: none;
+  padding: 1rem;
+}
+
+nav a:link, nav a:visited {
+  color: var(--nav-link-color);
+}
+
+nav a:hover {
+  color: var(--nav-hover-link-color);
+  background-color: var(--nav-hover-background-color);
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.slideshow {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.slide {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  animation: slideShow 12s infinite;
+}
+
+.slide:nth-child(1) {
+  background-color: #f1f1f1;
+  animation-delay: 0s;
+}
+
+.slide:nth-child(2) {
+  background-color: #c0c0c0;
+  animation-delay: 4s;
+}
+
+.slide:nth-child(3) {
+  background-color: #a9a9a9;
+  animation-delay: 8s;
+}
+
+.slide h1 {
+  color: #ffffff;
+  text-align: center;
+  font-size: 24px;
+}
+
+@keyframes slideShow {
+  0%, 100% {
+    opacity: 0;
+  }
+  20%, 80% {
+    opacity: 1;
+  }
+}

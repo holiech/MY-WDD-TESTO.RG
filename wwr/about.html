@@ -1,0 +1,96 @@
+
+
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Whitewater Rafting Site Plan About Us| Raila Oliech</title>
+    <meta name="description" content="The rafting site Oliech BYU-Idaho coarse home page, About Us Page.">
+    <meta name="author" content="Raila Oliech">
+    <link rel="stylesheet" href="styles/about.css">
+  </head>
+  <body>
+    <header>
+        <div><img src="images/logos.png" alt="logo"></div>
+        <nav>
+            <a href="page.html">Page</a>
+            <a href="about.html">About</a>
+            <a href="home.html">Home</a>
+            <a href="contuct.html">Contact</a>
+            <a href="game.html"> Games</a>
+            <a href="j_testimony.html">TLK</a>
+          </nav>
+    </header>
+    <main>
+        <div class="herodiv">
+            <div class="hero">
+                <img src="images/fam_3.jpg" alt="family image">
+                <h1>Welcome</h1>
+                <h2>to Kosiga Investers limited</h2>
+            </div>
+        
+            <section>
+                <h2>HISTORY</h2>
+                <br>
+                <p> The enterprise that eventually came to be known as the Rocky Mountain base Company was established in St. 
+                    Kosiga, Kosiga, in 2022 by James bass and Raila Oliech. Among the original employees, known 
+                    as "Jmes's Hundred," were Omari Ann, who went on to take a leading role in the company's operations, 
+                    and Jim Dave, who was among those who bought out Smith and his partners in 2023. It was Bridger and his 
+                    partners who gave the enterprise the name "Rocky Mountain base Company."
+                </p>
+            </section>
+        </div>    
+        <br>
+        <h2>INVESTMENTS AWAITS YOU!</h2>
+        <div class="grid-container">
+            <div class="grid-item item1">
+                <figure>
+                    <img src="images/MY1.jpg" alt="employee imaage">
+                    <figcaption>Reservations Agent</figcaption>
+                </figure>
+            </div>
+
+            <div class="grid-item item2">
+                <figure>
+                    <img src="images/MY.jpg" alt="employee image">
+                    <figcaption>secretary</figcaption>
+                </figure>
+            </div>
+            <div class="grid-item item3">
+                <figure>
+                    <img src="images/fam_3.jpg" alt="employee imaage">
+                    <figcaption>patron</figcaption>
+                </figure>    
+            </div>   
+        </div>
+    </main>
+    <footer>
+        <p>© 2023 🌳 Whitewater Rafting base 🌳 Oliech</p>
+        <div class="sociallinks">
+            <a href="https://facebook.com">
+            <img src="images/facebook.png" alt="Facebook">
+            </a>
+            <a href="https://twitter.com">
+            <img src="images/twitter.png" alt="Twitter">
+            </a>
+            <a href="https://whatsapp.com">
+            <img src="images/whatsapp.png" alt="Instagram">
+            </a>
+        </div>
+    </footer>
+    <script>
+        // Add an event listener to the "TLK" link
+        const tlkLink = document.querySelector('a[href=j_testimony.html"]');
+        tlkLink.addEventListener('click', function(event) {
+          if (confirm("You are about to leave this site and navigate to a different website. Continue?")) {
+            // If user confirms, navigate to "J_testimony.html"
+            window.location.href = "j_testimony.html";
+          } else {
+            event.preventDefault(); // Prevent navigation if user cancels
+          }
+        });
+      </script>
+      
+  </body>
+</html>  

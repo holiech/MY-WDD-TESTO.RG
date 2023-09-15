@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+  }
+  .container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+  p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #666;
+  }
+  .verse {
+    color: #0066cc; /* Verse color */
+    font-weight: bold;
+  }
+  .highlight {
+    background-color: #ffcc80; /* Highlight color */
+  }
+  button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+</style>
+<title>Read and Highlight Paragraphs</title>
+</head>
+<body>
+  <div class="container">
+    <h1>The Blessings of Missionary Work</h1>
+    <p>Dear brothers and sisters, today we come together to discuss a topic of great significance in our lives as members of The Church of Jesus Christ of Latter-day Saints: missionary work. The Savior Himself instructed, "<span class="verse">Go ye therefore, and teach all nations, baptizing them in the name of the Father, and of the Son, and of the Holy Ghost</span>" (Matthew 28:19).</p>
+    <p>Missionary work is not just a duty; it is a privilege and a blessing. The act of sharing the restored gospel is a reflection of our love for our Heavenly Father and our desire to help our brothers and sisters come unto Christ. In the words of the prophet Alma, "<span class="verse">Behold, the Lord doth grant unto all nations, of their own nation and tongue, to teach his word, yea, in wisdom, all that he seeth fit that they should have</span>" (Alma 29:8).</p>
+    <!-- Add more paragraphs as needed... -->
+    <p>As we engage in missionary work, we experience personal growth and spiritual development. Our faith deepens as we rely on the Lord to guide us in our efforts. Our confidence in sharing our testimonies and the gospel principles increases, and we become more effective instruments in the hands of the Lord.</p>
+    <p>One of the beautiful aspects of missionary work is the unity it brings among members. As we rally together to support those who are serving full-time missions, we create a network of love and encouragement. Our collective efforts strengthen the Church and contribute to the fulfillment of prophecies that the gospel will be preached to all nations.</p>
+    <p>It's important to remember that missionary work is not limited to full-time missionaries. Each of us has opportunities to share the gospel in our daily interactions. Whether it's through acts of service, living Christlike lives, or answering questions about our faith, we can all contribute to the Lord's work. As the Apostle Paul taught, "<span class="verse">How then shall they call on him in whom they have not believed? and how shall they believe in him of whom they have not heard? and how shall they hear without a preacher?</span>" (Romans 10:14).</p>
+    <p>The blessings of missionary work extend not only to those who receive the gospel but also to those who share it. Our efforts to invite others to come unto Christ align us with the Savior's mission and deepen our understanding of His Atonement. As we seek to rescue souls, we ourselves are rescued from selfishness and worldly distractions.</p>
+    <p>In conclusion, missionary work is a sacred responsibility that invites us to participate in the gathering of Israel. It is an opportunity to serve the Lord and bless the lives of our fellow beings. Let us remember the Savior's promise, "<span class="verse">And if it so be that you should labor all your days in crying repentance unto this people, and bring, save it be one soul unto me, how great shall be your joy</span>" (D&amp;C 18:15).</p>
+    <p>May we embrace the blessings of missionary work with gratitude and enthusiasm. May we seek the guidance of the Holy Spirit to know how to best share the gospel with others. As we join together in this work, may our efforts be consecrated unto the Lord and result in the salvation and exaltation of God's children. In the name of Jesus Christ, amen.</p>
+  </div>
+  <button id="readButton">Read</button>
+  <script>
+    let paragraphs = document.querySelectorAll('.container p');
+    let currentIndex = 0;
+    let reading = false;
+    let synth = window.speechSynthesis;
+
+    document.getElementById('readButton').addEventListener('click', function() {
+      if (!reading) {
+        reading = true;
+        this.innerText = 'Stop';
+        readParagraphs();
+      } else {
+        reading = false;
+        this.innerText = 'Read';
+        resetParagraphs();
+        synth.cancel(); // Stop speech synthesis
+      }
+    });
+    
+    function readParagraphs() {
+      if (currentIndex < paragraphs.length && reading) {
+        paragraphs[currentIndex].classList.add('highlight'); // Highlight the paragraph being read
+        paragraphs[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' }); // Scroll to the paragraph
+        let text = paragraphs[currentIndex].textContent;
+        let utterance = new SpeechSynthesisUtterance(text);
+        utterance.onend = function() {
+          paragraphs[currentIndex].classList.remove('highlight'); // Remove the highlight after reading
+          currentIndex++;
+          readParagraphs(); // Read next paragraph
+        };
+        synth.speak(utterance); // Start speech synthesis
+      } else {
+        currentIndex = 0;
+        resetParagraphs();
+      }
+    }
+    
+    function resetParagraphs() {
+      paragraphs.forEach(paragraph => {
+        paragraph.classList.remove('highlight');
+      });
+    }
+  </script>
+</body>
+</html>

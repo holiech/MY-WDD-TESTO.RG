@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bank Account</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            color: #007bff;
+            text-align: center;
+        }
+
+        h2 {
+            color: #666;
+            text-align: center;
+        }
+
+        div {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: inline-block;
+            width: 120px;
+            font-weight: bold;
+        }
+
+        input[type="number"],
+        input[type="text"] {
+            width: 200px;
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .message {
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <a href="trip.html">"BACK"</a>
+    <h1>Bank Account</h1>
+    <h2>Only use deposit, if you have currently sent your Money</h2>
+    <p><i>Worning:</i> Please ensure that the deposit amount you enter matches the exact amount you have sent to us. The deposit should be allocated exclusively to either Personal or Group savings, without involving any loans or interest.</p>
+
+        <p>After any transaction is made, it is essential for each member to personally update their account here. This ensures that the records accurately reflect the transactions carried out by each individual.</p>
+
+    <div>
+        <label for="amount">Deposit Amount:</label>
+        <input type="number" id="amount" placeholder="Enter amount">
+        <button onclick="depositMoney()">Deposit</button>
+    </div>
+    <div>
+        <label for="name">User:</label>
+        <input type="text" id="name" placeholder="Enter name">
+        <button onclick="checkBalance()">Check Balance</button>
+    </div>
+    <div>
+        <label for="withdrawAmount">Withdraw Amount:</label>
+        <input type="number" id="withdrawAmount" placeholder="Withdraw if you made mistake">
+        <button onclick="withdrawMoney()">Withdraw</button>
+    </div>
+    <div id="result">
+        <!-- Placeholder for displaying balance -->
+    </div>
+
+    <script>
+        // Simulated bank balances for different users
+        let balances = {
+            "John": 5100,
+            "Peter": 7300,
+            "Bornbray": 7700,
+            "Clifford": 500,
+            "Samuel": 2100,
+            "Edwin": 3000,
+            "Peteratom": 500,
+            "Oliech": 6200,
+            "Shem": 7615,
+            "Billy": 900,
+            "Cynthia": 100,
+            "Isaac" : 4800,
+            "Raila" : 7200
+            
+            
+        };
+
+        // Check if the user has accessed the page today
+        const lastAccessDate = localStorage.getItem('lastAccessDate');
+        const currentDate = new Date().toLocaleDateString();
+
+        if (lastAccessDate !== currentDate) {
+            // Reset deposit action for a new day
+            localStorage.setItem('lastAccessDate', currentDate);
+            localStorage.removeItem('depositUser');
+        }
+
+        function depositMoney() {
+            const name = document.getElementById("name").value;
+            const depositAmount = parseFloat(document.getElementById("amount").value);
+
+            // Check if the user has already deposited
+            const depositedUser = localStorage.getItem('depositUser');
+
+            if (depositedUser === name) {
+                alert("You have already made a deposit today. Deposit is allowed only once a day.");
+                return;
+            }
+
+            // Validate the deposit amount (ensure it's a positive number)
+            if (isNaN(depositAmount) || depositAmount <= 0) {
+                alert("Please enter a valid positive amount.");
+                return;
+            }
+
+            // Check if the name exists in the balances object
+            if (balances.hasOwnProperty(name)) {
+                // Update the balance
+                balances[name] += depositAmount;
+                document.getElementById("amount").value = ""; // Clear the input field
+
+                // Get the current date
+                const currentDate = new Date().toLocaleDateString();
+
+                // Calculate the transaction cost (assumed to be Ksh7.00 for this example)
+                const transactionCost = 7.00;
+
+                // Calculate the total balance after the deposit
+                const totalBalance = balances[name].toFixed(2);
+
+                // Construct the confirmation message
+                const confirmationMessage = `Confirmed. Ksh ${depositAmount.toFixed(2)} deposited on ${currentDate}. ${name}'s account balance is Ksh ${totalBalance}. Transaction cost, Ksh ${transactionCost.toFixed(2)}. Amount you can transact within the day is 299,600.00. Dial *234*0# to check your FULIZA LIMIT.`;
+
+                // Display the confirmation message
+                alert(confirmationMessage);
+
+                // Record the deposit action for the current day
+                localStorage.setItem('depositUser', name);
+            } else {
+                alert("User not found.");
+            }
+        }
+
+        function checkBalance() {
+            const name = document.getElementById("name").value;
+
+            // Check if the name exists in the balances object
+            if (balances.hasOwnProperty(name)) {
+                // Display the current balance
+                document.getElementById("result").textContent = `${name}'s Balance: $${balances[name].toFixed(2)}`;
+            } else {
+                alert("User not found.");
+            }
+        }
+
+        function withdrawMoney() {
+            const name = document.getElementById("name").value;
+            const withdrawAmount = parseFloat(document.getElementById("withdrawAmount").value);
+
+            // Validate the withdraw amount (ensure it's a positive number)
+            if (isNaN(withdrawAmount) || withdrawAmount <= 0) {
+                alert("Please enter a valid positive amount.");
+                return;
+            }
+
+            // Check if the name exists in the balances object
+            if (balances.hasOwnProperty(name)) {
+                // Check if the user has sufficient balance for withdrawal
+                if (withdrawAmount <= balances[name]) {
+                    // Update the balance
+                    balances[name] -= withdrawAmount;
+                    document.getElementById("withdrawAmount").value = ""; // Clear the input field
+
+                    // Display the confirmation message
+                    alert(`Confirmed. Ksh ${withdrawAmount.toFixed(2)} withdrawn. ${name}'s updated account balance is Ksh ${balances[name].toFixed(2)}.`);
+                } else {
+                    alert("Insufficient balance for withdrawal.");
+                }
+            } else {
+                alert("User not found.");
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+  }
+  h1 {
+    color: #333;
+    text-align: center;
+  }
+  em {
+    font-style: italic;
+  }
+  strong {
+    font-weight: bold;
+  }
+  .verse {
+    color: #8B0000;
+    font-style: italic;
+  }
+  .content {
+    border: 1px solid #ccc;
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  .quote {
+    color: #1E90FF;
+    font-weight: bold;
+  }
+  .back-button {
+    text-align: center;
+    margin-top: 20px;
+  }

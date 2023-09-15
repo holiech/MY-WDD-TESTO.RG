@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Strengthening Power of Testimony</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+  .highlight {
+    background-color: #ffcc80; /* Highlight color */
+  }
+  button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>The Strengthening Power of Testimony</h1>
+  <p>My dear brothers and sisters, today I want to share with you the profound impact that testimony has had on my life. As members of the Church of Jesus Christ of Latter-day Saints, we often hear the term 'testimony,' but what does it truly mean? A testimony is a personal witness of truth through the promptings of the Holy Ghost. It is a spiritual confirmation that certain principles, teachings, and doctrines are real and true.</p>
+  <p>When I reflect on my own journey of faith, I am reminded of the scriptural promise found in the Book of Mormon: "And when ye shall receive these things, I would exhort you that ye would ask God, the Eternal Father, in the name of Christ, if these things are not true; and if ye shall ask with a sincere heart, with real intent, having faith in Christ, he will manifest the truth of it unto you, by the power of the Holy Ghost" (Moroni 10:4).</p>
+  <p>Throughout my life, I have sought to strengthen my testimony through prayer and scripture study. The more I turn to God in sincere prayer, the more I feel His presence in my life. As I immerse myself in the scriptures, I discover timeless truths that apply to my challenges and experiences. It is through these means that my testimony is nurtured and fortified.</p>
+  <p>Sharing my testimony with others has also been a source of great strength. There is a unique power that comes from verbalizing our beliefs. When we express our convictions, we invite the Spirit to confirm their truthfulness to both ourselves and those who hear us. This practice of sharing our testimony is not only an act of faith but also a way to inspire and uplift others.</p>
+  <p>In conclusion, my dear friends, testimony is a gift from God that brings light and clarity to our lives. It is a source of strength that guides us through challenges and fills us with hope. As we seek to nurture and deepen our testimonies, we invite the Spirit into our hearts and homes. May we never underestimate the power of a sincere testimony and the influence it can have on ourselves and those around us. I bear witness of the truthfulness of these principles and of the restored gospel of Jesus Christ. In the name of Jesus Christ, amen.</p>
+</div>
+<button id="readButton">Read</button>
+    <script>
+        let paragraphs = document.querySelectorAll('.container p, .container h1');
+        let currentIndex = 0;
+        let currentWordIndex = 0;
+        let reading = false;
+        let synth = window.speechSynthesis;
+
+        document.getElementById('readButton').addEventListener('click', function() {
+            if (!reading) {
+                reading = true;
+                this.innerText = 'Stop';
+                readParagraphs();
+            } else {
+                reading = false;
+                this.innerText = 'Read';
+                resetParagraphs();
+                synth.cancel(); // Stop speech synthesis
+            }
+        });
+
+        function readParagraphs() {
+            if (currentIndex < paragraphs.length && reading) {
+                paragraphs[currentIndex].classList.add('highlight'); // Highlight the element being read
+                paragraphs[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' }); // Scroll to the element
+                let text = paragraphs[currentIndex].textContent;
+                let words = text.split(' '); // Split the text into words
+                let utterance = new SpeechSynthesisUtterance(text);
+                utterance.onboundary = function(event) {
+                    if (event.name === 'word') {
+                        highlightWord(currentWordIndex);
+                        currentWordIndex++;
+                    }
+                };
+                utterance.onend = function() {
+                    paragraphs[currentIndex].classList.remove('highlight'); // Remove the highlight after reading
+                    currentWordIndex = 0;
+                    currentIndex++;
+                    readParagraphs(); // Read next element
+                };
+                utterance.onerror = function(event) {
+                    console.error('An error occurred while processing the speech synthesis:', event.error);
+                    currentIndex++;
+                    readParagraphs(); // Continue to the next element
+                };
+                synth.speak(utterance); // Start speech synthesis
+            } else {
+                currentIndex = 0;
+                currentWordIndex = 0;
+                resetParagraphs();
+            }
+        }
+
+        function highlightWord(index) {
+            paragraphs[currentIndex].innerHTML = paragraphs[currentIndex].innerHTML.replace(/<\/?mark>/g, ''); // Remove existing highlights
+            let words = paragraphs[currentIndex].textContent.split(' ');
+            if (words[index] !== undefined) {
+                words[index] = `<mark>${words[index]}</mark>`; // Wrap the word in <mark> tags
+                paragraphs[currentIndex].innerHTML = words.join(' '); // Update the paragraph content
+            }
+        }
+
+        function resetParagraphs() {
+            paragraphs.forEach(paragraph => {
+                paragraph.classList.remove('highlight');
+                paragraph.innerHTML = paragraph.textContent; // Reset paragraph content to remove highlights
+            });
+        }
+    </script>
+</body>
+<footer>
+    <div class="footer">
+        <h2>Talks</h2>
+        <ul>
+            <li><a href="j_attonment.html">Learn more about the Atonement</a></li>
+            <li><a href="j_plan_salvation.html">The Plan of Salvation </a></li>
+            <li><a href="j_charity.html">Charity and Loving Service </a></li>
+            <li><a href="j_love.html">The Principle of Faith </a></li>
+            <li><a href="j_Responsibility.html">Work and Responsibility</a></li>
+            <li><a href="j_restoration.html">The Restoration of Truth </a></li>
+            <li><a href="j_baptism.html">Baptism</a></li>
+            <li><a href="j_robot.html">speaking j_robot</a></li>
+            <li><a href="j_love_neighbor.html">Love for Our Neighbor </a></li>
+            <li><a href="j_holy_ghost.html">The Holy Ghost as Your Companion</a></li>
+            <li><a href="j_testimony.html">Talk about Testimony</a></li>
+            <li><a href="j_testimoney.html">Short Testimony</a></li>
+            <li><a href="j_christlike.html">Christ-like Attributes</a></li>
+            <li><a href="j_repentance.html">The Gift of Repentance</a></li>
+        </ul>
+    </div>
+    <p class="copyright">© 2023 rayonsdjibouti. All rights reserved.</p>
+</footer>
+
+</html>

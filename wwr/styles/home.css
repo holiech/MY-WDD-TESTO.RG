@@ -1,0 +1,358 @@
+/* Reset default margin and padding for all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url("imaghes/fam_8.jpg");
+    background-size: cover; /* Adjust the background size as needed */
+    background-origin: 100%;
+    background-position: center center;
+    background-color: #ccc;
+  }
+  
+  header {
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 5px solid #9f0e0e;
+    background-color: white;
+    position: fixed;
+    width: 100%;
+    z-index: 9999; /* Set a high z-index to keep it above other elements */
+}
+    
+  
+  .logo img{
+    width: 70px;
+    justify-content: left;
+  }
+
+    nav{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding-right: 8%;
+  }
+    
+  
+  nav a {
+    text-decoration: none;
+    color: #333;
+
+  }
+  
+  /* Add space between navigation links */
+  nav a:not(:last-child) {
+    margin: 0 9px;
+    text-align: center;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  /* Additional CSS styles for the rest of the page can go here */
+  
+  /* Slideshow background */
+  
+/* Slideshow background */
+.slideshow-container {
+    position: relative;
+    max-width: 100%;
+    height: 600px; /* Set the height of the slideshow container */
+    margin: auto;
+  }
+  
+  .slideshow-container div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding-top:80px;
+    left: 0;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+  
+  .slideshow-container div img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Animation for slideshow */
+  @keyframes fade {
+    0% { opacity: 0; }
+  25% { opacity: 1; }
+  75% { opacity: 1; }
+  100% { opacity: 0; }
+  }
+  
+  .slideshow-container div:nth-child(1) {
+    animation: fade 8s infinite 0;
+  }
+  
+  .slideshow-container div:nth-child(2) {
+    animation: fade 8s infinite 8s;
+  }
+  
+  .slideshow-container div:nth-child(3) {
+    animation: fade 8s infinite 16s;
+  }
+  
+  .slideshow-container div:nth-child(4) {
+    animation: fade 8s infinite 24s;
+  }
+.slideshow-container div:nth-child(5){
+    animation: fade 8s infinite 32s;
+}
+
+.slideshow-container div:nth-child(6){
+    animation: fade 8s infinite 3s;
+}
+
+.slideshow-container div:nth-child(7){
+    animation: fade 8s infinite 40s;
+}
+
+  
+
+.slide-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 100px;
+  margin: 0;
+  align-items: center;
+}
+
+.slide-text h2,
+.slide-text p {
+  text-align: center; /* Center the heading and paragraph text */
+}
+
+.slide-text h2 {
+  margin-bottom: 10px; /* Add some spacing between heading and paragraph */
+}
+
+
+
+
+.contact-form {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    justify-content: space-between;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  textarea,
+  input[type="tel"],
+  select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  textarea {
+    resize: vertical;
+  }
+  
+  button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+
+  .flip-card {
+    perspective: 1000px;
+  }
+  
+  .flip-card-inner {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    transform-style: preserve-3d;
+  }
+  
+  .flip-card-front,
+  .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+  }
+  
+  .flip-card-back {
+    transform: rotateY(180deg);
+  }
+  
+
+
+
+  .chat-window {
+    background-color: #fff;
+    max-width: 200px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    position: absolute;
+    top: 70%;
+    right: 0;
+    justify-content: space-between;
+    padding: 1px;
+  }
+  
+  .chat-messages {
+    padding: 10px;
+  }
+  
+
+  .message {
+    margin: 4px 0;
+  }
+  
+  .user-input {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+  }
+  
+  .user-input input[type="text"] {
+    flex: 1;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .user-input button {
+    padding: 5px 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+  }
+  
+  .user-input button:hover {
+    background-color: #45a049;
+  }
+
+
+
+  
+.registration-button-container {
+  text-align: center;
+  margin-top: 70px; /* Add spacing between the slide container and button container */
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+}
+
+.register-button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 9px 18px;
+  text-decoration: none;
+  border-radius: 20px;
+}
+
+.register-button:hover {
+  background-color: #0056b3;
+}
+
+
+footer {
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-content div {
+  flex: 1 0 250px;
+  margin: 10px;
+}
+
+.footer-content h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.footer-content p, .footer-content ul {
+  margin-bottom: 10px;
+}
+
+.footer-content a {
+  color: #555;
+  text-decoration: none;
+}
+
+.footer-content a:hover {
+  text-decoration: underline;
+}
+
+.footer-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-content li {
+  margin-bottom: 5px;
+}
+
+.footer-content .footer-logo img {
+  width: 100px;
+}
+
+.footer-content .footer-logo {
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 600px) {
+  .footer-content div {
+    flex: 1 0 100%;
+  }
+}

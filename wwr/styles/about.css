@@ -1,0 +1,180 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap');
+
+:root {
+    --primary-color: #943939;
+    --secondary-color: white;
+    --accent1-color: lightgreen;
+    --accent2-color: pink;
+  
+    --heading-font: Roboto, Sans-serif;
+    --paragraph-font: "Open Sans",Sans-serif;
+  
+    --nav-background-color:steelblue;
+    --nav-link-color: #ffffff;
+    --nav-hover-link-color: hotpink;
+    --nav-hover-background-color: green;
+}
+
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-image: url("imaghes/fam_8.jpg");
+  background-size: cover; /* Adjust the background size as needed */
+  background-origin: 100%;
+  background-position: center center;
+  background-color: #ccc;
+}
+
+
+ h1, h2 {
+    font-family: var(--heading-font);
+    color: var(--primary-color);
+    font-size: 25px;
+    text-align: center;
+}
+
+
+a:link {
+    text-decoration: none;
+  }
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.herodiv{
+    position: relative;
+
+
+}
+
+
+
+.hero{
+  width: 1005;
+  display: flex;
+  animation: slide 16s infinite;
+}
+
+
+
+
+
+div h1, article {
+    position: absolute;
+}
+
+.herodiv img{
+    display: block;
+    width: 100%;
+    height: 100vh;
+}
+.herodiv h1{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  color: wheat;
+  font-size: 90px;
+  font-weight: bold;
+}
+
+nav{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding-right: 8%;
+}
+  
+nav a {
+  margin: 0 5px; /* Add spacing between navigation links */
+  color: #333;
+}
+img {
+    width:90px;
+}
+
+.hero h2{
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  color: wheat;
+  font-size: 20px;
+  
+}
+
+/* week four*/
+
+header {
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 5px solid #9f0e0e;
+  background-color: white;
+  position: fixed;
+  width: 100%;
+  z-index: 9999; /* Set a high z-index to keep it above other elements */
+}
+
+section h2, p{ 
+  margin-left: 50px; /* Adjust the margin value as desired */
+}
+
+
+
+
+.grid-container {
+  display: grid;
+  gap: 10px;
+  grid-gap: 10px;
+  min-width: auto;
+  display: flex;
+  min-width: 1px;
+  object-fit: cover;
+  align-items: center;
+  overflow: hidden;
+}
+
+.grid-item {
+  position: relative;
+  min-height: 1px;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+}
+
+.item1 {
+  grid-column: 2  span ;
+  grid-row: 1;
+}
+
+.item2 {
+  grid-column: 1 span;
+  grid-row: 1 ;
+}
+
+.item3 {
+  grid-column: 3  span ;
+  grid-row: 1;
+}
+.grid-container img{
+  width: 100%;
+  position: relative;
+  height: auto; /* Adjust the height as desired */
+}
+
+.sociallinks img{
+  width: 40px;
+}

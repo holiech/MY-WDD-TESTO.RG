@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="styles/register.css">
+    <!-- Your head content goes here -->
+    <style>
+      /* CSS styles for positioning the form container */
+      .slideshow-container {
+        position: relative;
+      }
+
+      .login-form-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #ffffff;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        display: none;
+      }
+
+      .visible {
+        display: block;
+      }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+        <img src="images/logos.png" alt="logo">
+      </div>
+      <nav>
+        <a href="page.html">Page</a>
+        <a href="about.html">About Us</a>
+        <a href="home.html">Home</a>
+        <a href="contuct.html">Contact Us</a>
+        <a href="game.html"> Games</a>
+      </nav>
+    <!-- Your header content goes here -->
+  </header>
+
+  <!-- Your slideshow and other sections go here -->
+  <main>
+    <div class="slideshow-container">
+      <div>
+        <img src="images/fam_10.jpg" alt="Slide 1">
+        <div class="slide-text">
+          <h2>Discover Lucrative Investment Opportunities</h2>
+          <p>Unlock the potential for remarkable returns. Our team of financial experts diligently research and identify promising investment opportunities.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Your main content goes here -->
+    <div class="registration-button-container">
+      <!-- "Register Now" link to toggle the login form -->
+      <a href="#" class="register-button" onclick="toggleLoginForm()">Enter to verify</a>
+    </div>
+
+    <!-- Login form -->
+    <div class="login-form-container" id="loginFormContainer">
+      <form id="loginForm">
+        <h2> Member Login</h2>
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+          <a href="#" id="forgotPasswordLink" onclick="handleForgotPassword()">Forgot Password</a>
+          <a href="#" id="forgotUsernameLink" onclick="handleForgotUsername()">Forgot Username</a>
+        </div>
+        <div class="form-group">
+          <button type="submit">Login</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <!-- Your footer content goes here -->
+  </footer>
+
+  <!-- Your chat window and script tags go here -->
+  <script>
+    // JavaScript code for handling the login form and "Register Now" link
+    function toggleLoginForm() {
+      const loginFormContainer = document.getElementById("loginFormContainer");
+      loginFormContainer.classList.toggle("visible");
+    }
+
+    function handleLoginFormSubmission(event) {
+      event.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      // Object (dictionary) of passwords that grant access with corresponding names
+      const accessPasswords = {
+        "4445": "John",
+        "7879": "Peter",
+        "7987": "Bornbray",
+        "2030": "Clifford",
+        "4445": "John",
+        "7888": "Peteratom",
+        "8887": "Oliech",
+        "2030": "Samuel",
+        "3435": "Edwin"
+      };
+
+      // Here, you can add your logic to handle the form submission (e.g., send data to a server for authentication)
+      // For this example, let's check if both the username and password are in the object and match the key-value pair.
+      if (
+        password.length === 4 &&
+        !isNaN(password) &&
+        accessPasswords.hasOwnProperty(password) &&
+        accessPasswords[password] === username
+      ) {
+        // Allow access and redirect to the home page if both the username and password are valid
+        console.log(`Login successful for ${username}! Redirecting to Account page...`);
+        alert(`Login successful for ${username}! Redirecting to Account page...`);
+        window.location.href = "trip.html"; // Replace "home.html" with the actual URL of your home page
+      } else {
+        // Display "Invalid username or password" message for invalid credentials
+        console.log("Invalid username or password.");
+        alert("Invalid username or password.");
+      }
+    }
+
+    function handleForgotPassword() {
+      const email = prompt("Please enter your email address:");
+
+      // Here you can add the logic to send a password reset link or instructions to the user's email
+      // For this example, we'll display an alert with the message.
+      const accessEmails = {
+        "john.doe@example.com": "John",
+        "parker@example.com": "Peter",
+        "peteratomm@gmail.com": "Peteratom",
+        "bonrbray@gmail.com": "Bornbray",
+        "mwangi@gmail.com": "Shem",
+        "sam2030@gmail.com": "Samuel",
+        "oliech@gmail.com": "Oliech",
+        "clifford@gmail.com" :"Clifford",
+        "edu@gmail.com": "Edwin"
+      };
+
+      if (accessEmails.hasOwnProperty(email)) {
+        alert(`A password reset link has been sent to ${email}`);
+      } else {
+        alert("Email address not found. Please check and try again.");
+      }
+    }
+
+    function handleForgotUsername() {
+      const email = prompt("Please enter your email address:");
+
+      // Here you can add the logic to retrieve the username associated with the entered email
+      // For this example, we'll display an alert with the message.
+      const accessEmails = {
+        "john.doe@example.com": "John",
+        "peter.parker@example.com": "Peter",
+        "james.smith@example.com": "James",
+        "anne.wilson@example.com": "Anne",
+        "shem.mwangi@example.com": "Shem",
+      };
+
+      if (accessEmails.hasOwnProperty(email)) {
+        alert(`Your username is: ${accessEmails[email]}`);
+      } else {
+        alert("Email address not found. Please check and try again.");
+      }
+    }
+
+    document.getElementById("loginForm").addEventListener("submit", handleLoginFormSubmission);
+  </script>
+</body>
+</html>

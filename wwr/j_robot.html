@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talk with me</title>
+    <link rel="stylesheet" href="styles/talk.css">
+    <style> 
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        #controls {
+            margin-top: 20px;
+        }
+
+        button {
+            font-size: 16px;
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        #output {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+
+
+        video {
+            width: 300px;
+            height: auto;
+            margin-bottom: 10px; /* Add spacing between videos */
+        }
+
+        .rotate-clockwise {
+            display: inline-block;
+            animation: rotateClockwise 5s linear infinite; /* Change the animation duration as needed */
+          }
+        
+          .rotate-anticlockwise {
+            display: inline-block;
+            animation: rotateAnticlockwise 5s linear infinite; /* Change the animation duration as needed */
+          }
+        
+          @keyframes rotateClockwise {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        
+          @keyframes rotateAnticlockwise {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-360deg); }
+          }
+
+
+    </style>
+</head>
+<>
+    <h1>ASK ME ANYTHING</h1>
+    
+    <div id="controls">
+        <button id="micButton">Tap to speak</button>
+        <button id="stopButton" disabled>Stop Listening</button>
+    </div>
+    
+    <div id="output"></div>
+    
+    <img class="rotate-clockwise" src="images/mypict1.png" alt="Clockwise Rotating Image" width="100">
+    <img class="rotate-anticlockwise" src="images/mypict1.png" alt="Anticlockwise Rotating Image" width="100">
+    <div class="back-buttons">
+        <a href="about.html">Back Home</a>
+      </div>
+    <!--<div class="video-container">
+        <h2>Netflix movies loading....</h2>
+        <video controls>
+            <source src="videos/mboso.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="download-link">
+            <a href="videos/mboso.mp4" download>Download Video 1</a>
+        </div>
+
+        <video controls>
+            <source src="videos/invitation.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="download-link">
+            <a href="videos/invitation.mp4" download>Download "invitation movie"2</a>
+        </div>
+
+        <video controls>
+            <source src="videos/prin.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="download-link">
+            <a href="videos/prin.mp4" download>Download Video 3</a>
+        </div>
+
+        <video controls>
+            <source src="videos/One Voice Children's Choir Song Playlist  Song Collection.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="download-link">
+            <a href="videos/One Voice Children's Choir Song Playlist  Song Collection.mp4" download>Downloa One Voice Choir4</a>
+        </div>
+        <video controls>
+            <source src="videos/Heart of the stone.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="download-link">
+            <a href="videos/Heart of the stone.mp4" download>Download  "Heart of the stone"5</a>
+        </div>
+        <video controls>
+            <source src="videos/The old guard.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="download-link">
+            <a href="videos/The old guard.mp4" download>Download Thhe old guard</a>
+        </div>
+
+        <video controls>
+            <source src="videos/i am all girls.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="download-link">
+            <a href="videos/i am all girls.mp4" download>Download i am all girls</a>
+        </div>
+        
+        <video controls>
+            <source src="videos/The Black Phone (2021).mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="download-link">
+            <a href="videos/The Black Phone (2021).mp4" download>Download The Black Phone (2021)</a>
+        </div>
+        
+    </div> -->
+
+    <script>
+        const micButton = document.getElementById('micButton');
+        const stopButton = document.getElementById('stopButton');
+        const outputDiv = document.getElementById('output');
+        let recognition;
+
+        // Handle the speech-to-text conversion
+        micButton.addEventListener('click', startRecognition);
+        stopButton.addEventListener('click', stopRecognition);
+
+        function startRecognition() {
+            recognition = new window.webkitSpeechRecognition();
+            recognition.continuous = false; // Listen for one command at a time
+
+            recognition.onstart = () => {
+                isListening = true;
+                micButton.textContent = 'Listening...';
+                stopButton.disabled = false;
+            };
+
+            recognition.onresult = (event) => {
+                const result = event.results[event.results.length - 1][0].transcript;
+                outputDiv.textContent = result;
+                handleUserInput(result.toLowerCase());
+                stopRecognition(); // Stop listening after processing the command
+            };
+
+            recognition.onend = () => {
+                isListening = false;
+                micButton.textContent = 'Tap to speak';
+                stopButton.disabled = true;
+            };
+
+            recognition.onerror = (event) => {
+                console.error(event.error);
+                stopRecognition();
+            };
+
+            recognition.start();
+        }
+
+        function stopRecognition() {
+            if (recognition) {
+                recognition.stop();
+                recognition = null;
+            }
+        }
+
+        function speak(text) {
+            const synth = window.speechSynthesis;
+            const utterance = new SpeechSynthesisUtterance(text);
+            synth.speak(utterance);
+        }
+        function getRandomStory() {
+            const stories = [
+                "Once upon a time, a friendly squirrel named Sammy found a hidden treasure in the woods. With a gleeful chirp, Sammy shared the treasure with his forest friends, and they all celebrated with a grand feast under the starry sky.",
+                "In a cozy village, Lily the baker created the most delightful treats. One day, she decided to bake a magical cake that could grant wishes. As the cake baked, the sweet aroma spread, and everyone's wishes came true, creating a day of happiness.",
+                "Across the ocean, Captain Flynn set sail on his ship, the Starlight Voyager. He charted a course for the legendary Isle of Gems, where he uncovered a chest of precious stones. The pirates traded their swords for a life of trade and adventure.",
+                "In a land of fantasy, young wizard Theo embarked on a quest to restore the ancient spell of harmony. With his loyal companions, Theo defeated dark forces and renewed magic's balance, leaving behind a realm of wonder and unity.",
+                "On an alien planet, Zara made an unlikely friend in a cosmic creature called Glint. Together, they shared stories of their worlds, bridging the gap between their species and paving the way for intergalactic friendship and exploration.",
+                "In a lush meadow on the edge of a vibrant forest, a fluffy rabbit named Rosie lived. Rosie had a curious spirit and a love for exploring. One sunny morning, she hopped along a path she'd never taken before. Deep within the woods, she stumbled upon a hidden glade adorned with colorful flowers. As Rosie marveled at the beauty around her, she met a wise old turtle named Terrance. He shared stories of the forest's history and taught Rosie the importance of balance in nature. Grateful for the encounter, Rosie returned to her meadow with a newfound appreciation for her home and the world beyond.",
+                "Sure! Here's a short story for you, In a quaint village nestled between rolling hills, a curious child named Mia lived. Mia spent her days exploring the woods, chasing butterflies, and dreaming of far-off adventures. One misty morning, while wandering near a sparkling brook, Mia discovered a mysterious, old map. It depicted a hidden waterfall rumored to grant wishes. Determined, Mia embarked on a journey, facing challenges and making friends along the way. As she reached the waterfall's embrace, her wish was simple: happiness for her village. The waterfall shimmered, and Mia's wish echoed in laughter, bonding the village in a newfound joy."
+            ];
+
+            return stories[Math.floor(Math.random() * stories.length)];
+        }
+
+        let currentPlayingVideo = null;
+        function handleUserInput(input) {
+            if (input.includes('hello')) {
+                speak("Hey, how can I help you?");
+            } else if (input.includes('how are you')) {
+                speak("I'm just a computer program, but I'm here to assist you!");
+            } else if (input.includes('what is your name')) {
+                speak("I'm a language model designed to help you. You can call me Rayonsdjiboutih!");
+            } else if (input.includes('tell me a story')) {
+                const randomStory = getRandomStory();
+                speak(randomStory);
+            }  else if (input.includes('thank you')) {
+                speak("You're welcome! Feel free to ask if you have more questions.");
+            } else  if (input.includes('can you help me') || input.includes('i need help')) {
+                speak("Of course, I'm here to help! Please let me know what you need assistance with, and I'll do my best to provide guidance and support.?");
+
+            } else  if (input.includes('do you eat') || input.includes('can you eat')) {
+                speak("I don't eat as humans do, as I'm a computer program created by OpenAI. I'm here to provide information and help answer questions to the best of my abilities. Is there something specific you'd like to know or discuss?");
+            }
+             else if (input.includes('tell me a riddle')) {
+                speak("I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I?");
+            } else if (input.includes('answer')) {
+                speak("The answer to the riddle is an echo.");
+            } else if (input.includes('play a song') || input.includes('play song') || input.includes('play') || input.includes('play for me a song') || input.includes('play another song') || input.includes('another song')){
+                if (currentPlayingVideo) {
+                    currentPlayingVideo.pause(); // Pause the currently playing video
+                }
+           
+                const videos = document.querySelectorAll('.video-container video');
+                const randomVideoIndex = Math.floor(Math.random() * videos.length);
+                const selectedVideo = videos[randomVideoIndex];
+                selectedVideo.play(); // Play the selected video
+                currentPlayingVideo = selectedVideo;
+                speak("Sure, here's a song for you!");
+
+            } else if (input.includes('stop') || input.includes('stop song') || input.includes('stop play')) {
+                if (currentPlayingVideo) {
+                    currentPlayingVideo.pause(); // Pause the currently playing video
+                    currentPlayingVideo = null;
+                    speak("Song stopped.");
+                } else {
+                    speak("There's no song currently playing.");
+                }
+            } else if (input.includes('bye')) {
+                speak("Goodbye! Have a great day!");
+            } else if (input.includes('i want to eat') || input.toLowerCase().includes('i\'m hungry') || input.toLowerCase().includes('i am hungry')) {
+                speak("It sounds like you're hungry! Make sure to have a delicious and nutritious meal.");
+            } else if (input.includes('feeling sleepy') || input.includes('I\'m tired')) {
+                const sleepyResponses = [
+                    "It sounds like you could use some rest. Maybe a quick nap will refresh you.",
+                    "If you're feeling tired, taking a break and getting some rest might help you feel more energized.",
+                    "Feeling sleepy? Sometimes a short walk or stretching can help wake you up a bit.",
+                    "Remember to listen to your body. If you're tired, giving yourself some downtime can be beneficial.",
+                    "Getting a good night's sleep is important for your overall well-being. Sweet dreams when you decide to rest!",
+                ];
+                
+                const randomResponse = sleepyResponses[Math.floor(Math.random() * sleepyResponses.length)];
+                speak(randomResponse);
+            } else if (input.includes('i am sick')) {
+                speak("I'm sorry to hear that. Remember to rest and consider seeking medical advice if needed.");
+            } else if (input.includes('i am happy')) {
+                speak("That's wonderful to hear! I'm here if you'd like to share your happiness or talk about anything.");
+            } else if (input.includes('tell me a joke')) {
+                const jokes = [
+                    "Why don't scientists trust atoms? Because they make up everything!",
+                    "Parallel lines have so much in common. It's a shame they'll never meet.",
+                    "Did you hear about the mathematician who's afraid of negative numbers? He'll stop at nothing to avoid them.",
+                ];
+                const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+                speak(randomJoke);
+            }  else if (input.includes('current time')) {
+                const now = new Date();
+                const currentTime = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+                speak(`The current time is ${currentTime}.`);
+
+            } else if (input.toLowerCase().includes('ok') || input.includes('good') || input.includes('alright')) {
+                speak("Got it! If you have any more questions or need assistance, feel free to ask.");
+            } else if (input.toLowerCase().includes('thanks') || input.toLowerCase().includes('thank you')) {
+                speak("You're welcome! If you have more questions or need help, don't hesitate to ask.");
+            } else if (input.includes('weather today')) {
+                const location = 'YourCity, YourCountry'; // Replace with the actual location
+                const weatherInfo = `The weather today in ${location} is expected to be sunny with a high of 25°C.`;
+                speak(weatherInfo);
+            } else if (input.includes('tell me a verse')) {
+                const verse = [
+                    "2 Nephi 2:25: Adam fell that men might be, and men are, that they might have joy.",
+                    "Moroni 10:3-5: Behold, I would exhort you that when ye shall read these things...",
+                    "Alma 32:21: And now as I said concerning faith—faith is not to have a perfect knowledge...",
+                    "Ether 12:27: And if men come unto me I will show unto them their weakness.",
+                    "2 Nephi 2:25: Adam fell that men might be; and men are, that they might have joy. This verse is from the Book of 2 Nephi, and it teaches about the purpose of life and the importance of experiencing joy. It suggests that the fall of Adam and Eve was part of God's plan to allow us to come to earth and experience mortality, enabling us to have the opportunity to find happiness and joy in this life and the next.",
+                    "Alma 34:32 - Yea, I say unto you, that the man that doeth this, the same cometh out in open rebellion against God; therefore he listeth to obey the evil spirit, and becometh an enemy to all righteousness; therefore, the Lord has no place in him, for he dwelleth not in unholy temples.",
+                    "Alma 42:30 - O my son, I desire that ye should deny the justice of God no more. Do not endeavor to excuse yourself in the least point because of your sins, by denying the justice of God; but do you let the justice of God, and his mercy, and his long-suffering have full sway in your heart; and let it bring you down to the dust in humility.",
+                    "Mosiah 4:11 - Remember God's goodness and humble yourself in His presence.",
+                    "2 Nephi 4:17-19 - Despite God's works, I sorrow for my sins.",
+                    "2 Nephi 33:10-11 - Believe in Christ and do good; His words are truth.",
+                    "Alma 34:32 - For behold, this life is the time for men to prepare to meet God; yea, behold the day of this life is the day for men to perform their labors.",
+                    "Alma 37:37 - Counsel with the Lord in all thy doings, and he will direct thee for good; yea, when thou liest down at night lie down unto the Lord, that he may watch over you in your sleep; and when thou risest in the morning let thy heart be full of thanks unto God; and if ye do these things, ye shall be lifted up at the last day",
+                    "1Nephi 3:7 - And it came to pass that I, Nephi, said unto my father: I will go and do the things which the Lord hath commanded, for I know that the Lord giveth no commandments unto the children of men, save he shall prepare a way for them that they may accomplish the thing which he commandeth them.",
+                    "Mosiah 2:17 - And behold, I tell you these things that ye may learn wisdom; that ye may learn that when ye are in the service of your fellow beings, ye are only in the service of your God.",
+                    "Alma 34:32 - For behold, this life is the time for men to prepare to meet God; yea, behold the day of this life is the day for men to perform their labors.",
+                    "Helaman 5:12 - And now, my sons, remember, remember that it is upon the rock of our Redeemer, who is Christ, the Son of God, that ye must build your foundation; that when the devil shall send forth his mighty winds, yea, his shafts in the whirlwind, yea, when all his hail and his mighty storm shall beat upon you, it shall have no power over you to drag you down to the gulf of misery and endless wo, because of the rock upon which ye are built, which is a sure foundation, a foundation whereon if men build they cannot fall.",
+                    "Moroni 10:4-5 - And when ye shall receive these things, I would exhort you that ye would ask God, the Eternal Father, in the name of Christ, if these things are not true; and if ye shall ask with a sincere heart, with real intent, having faith in Christ, he will manifest the truth of it unto you, by the power of the Holy Ghost. And by the power of the Holy Ghost, ye may know the truth of all things",
+                    "Ether 12:27 - And if men come unto me I will show unto them their weakness. I give unto men weakness that they may be humble; and my grace is sufficient for all men that humble themselves before me; for if they humble themselves before me, and have faith in me, then will I make weak things become strong unto them.",
+
+                    "2 Nephi 25:26 - And we talk of Christ, we rejoice in Christ, we preach of Christ, we prophesy of Christ, and we write according to our prophecies, that our children may know to what source they may look for a remission of their sins.",
+                    
+                    "Alma 7:11-12 - And he shall go forth, suffering pains and afflictions and temptations of every kind; and this that the word might be fulfilled which saith he will take upon him the pains and the sicknesses of his people. And he will take upon him death, that he may loose the bands of death which bind his people; and he will take upon him their infirmities, that his bowels may be filled with mercy, according to the flesh, that he may know according to the flesh how to succor his people according to their infirmities.",
+                    
+                    "2 Nephi 2:25 - Adam fell that men might be, and men are that they might have joy.",
+                    
+                    "Alma 37:35 - O, remember, my son, and learn wisdom in thy youth; yea, learn in thy youth to keep the commandments of God.",
+                    
+                    "Helaman 5:12  And now, my sons, remember, remember that it is upon the rock of our Redeemer, who is Christ, the Son of God, that ye must build your foundation, that when the devil shall send forth his mighty winds, yea, his shafts in the whirlwind, yea, when all his hail and his mighty storm shall beat upon you, it shall have no power over you to drag you down to the gulf of misery and endless wo, because of the rock upon which ye are built, which is a sure foundation, a foundation whereon if men build they cannot fall.",
+                    
+                    "2 Nephi 28:30 - For behold, thus saith the Lord God: I will give unto the children of men line upon line, precept upon precept, here a little and there a little; and blessed are those who hearken unto my precepts, and lend an ear unto my counsel, for they shall learn wisdom; for unto him that receiveth I will give more; and from them that shall say, We have enough, from them shall be taken away even that which they have.",
+                    
+                    "Alma 34:32 - For behold, this life is the time for men to prepare to meet God; yea, behold the day of this life is the day for men to perform their labors."
+                ];
+                const randomverse = verse[Math.floor(Math.random() * verse.length)];
+                speak(randomverse);
+                
+            } else if (input.includes('search for')) {
+                const query = input.replace('search for', '').trim();
+                const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+                const searchResponse = `Sure, let me search for '${query}' for you. Here are the search results: ${searchUrl}`;
+                speak(searchResponse);
+            
+            } else if (input.includes('have a headache')) {
+                speak("I'm sorry to hear that you have a headache. Make sure to rest, drink water, and consider taking a break. If the headache persists, you might want to consult a medical professional.");
+            } else if (input.includes('i am broke') || input.includes('i don\'t have money') || input.includes('i\'m broke')) {
+                speak("I understand that financial difficulties can be challenging. If you're in need of immediate assistance, I recommend reaching out to local charities, community organizations, or government programs that might be able to provide support. It's important to seek help from trusted sources in your area. Remember that you're not alone, and there are people and resources available to help during tough times.");
+            } else if (input.includes('give me money')) {
+                speak("I understand that you might be going through a tough time, but I'm not able to provide financial assistance. Consider reaching out to people you know or exploring local support options.");
+            } else if (input.includes('come here')) {
+                speak("I'd love to help, but I'm an AI and can't physically come to your location. Is there something specific you need assistance with?");
+            } else if (input.toLowerCase().includes('do you know me')) {
+                speak("I'm just a computer program, so I don't have personal knowledge about individuals. However, I'm here to assist and provide information to the best of my abilities!");
+            } else if (input.toLowerCase().includes('no')) {
+                speak("Alright, feel free to ask if you have any more questions or if there's something else I can assist you with.");
+           
+            }else if (input.includes('i am angry')) {
+                speak("I'm sorry to hear that you're feeling angry. Sometimes emotions can be challenging to deal with. If you'd like, you can take a deep breath, try to find a quiet space, or engage in an activity that helps you feel more at ease. Remember, it's okay to feel emotions, and taking steps to manage them can be helpful.");
+            } else if (input.includes('i am tired') || input.includes('i\'m tired')) {
+                speak("I'm sorry to hear that you're tired. It's important to take breaks and get some rest. If possible, try to relax and recharge. Remember that self-care is essential for your well-being.");
+
+
+
+            } else if (input.includes('what\'s your name')) {
+                speak("I'm just a computer program, so I don't have a personal name like humans do. You can call me Assistant.");
+            } else if (input.toLowerCase().includes('investment')) {
+                speak("Investing is a smart way to grow your wealth over time. It's important to do thorough research and consider various investment options that align with your financial goals and risk tolerance. Popular investment options include stocks, bonds, mutual funds, real estate, and more. Keep in mind that all investments carry some level of risk, and it's essential to diversify your portfolio to reduce risk. If you have specific investment-related questions, feel free to ask!");
+            } else if (input.toLowerCase().includes('how can i invest my money')) {
+                speak("Investing can be done through various financial instruments such as stocks, bonds, mutual funds, real estate, and more. It's essential to assess your risk tolerance, financial goals, and investment horizon before making any investment decisions. Consult with a financial advisor for personalized guidance.");
+            } else if (input.toLowerCase().includes('best stocks to invest in')) {
+                speak("The best stocks to invest in depend on your individual financial situation and investment goals. It's crucial to conduct thorough research on companies, their financial health, and their growth prospects before investing in their stocks. Consider diversifying your investments to reduce risk.");
+            } else if (input.toLowerCase().includes('how can i start saving for retirement')) {
+                speak("Starting early and contributing regularly to retirement accounts such as 401(k)s or IRAs is a good way to save for retirement. Consider maximizing employer matching contributions and exploring low-cost index funds or target-date funds for long-term growth.");
+            } else if (input.toLowerCase().includes('benefits of mutual funds')) {
+                speak("Mutual funds pool money from multiple investors to invest in a diversified portfolio of stocks, bonds, or other securities. They offer diversification, professional management, and liquidity. Additionally, they are suitable for investors with different risk tolerances.");
+            } else if (input.toLowerCase().includes('who created you') || input.includes('who made you')) {
+                speak("I was created by rayonsdjibotih, an artificial intelligence research. rayonsdjiboutih trained me on a diverse range of internet text to help me generate human-like responses to a wide variety of queries and prompts. Is there anything else you'd like to know?. ");
+            } else if (input.toLowerCase().includes('improve my credit score')) {
+                speak("To improve your credit score, pay bills on time, keep credit card balances low, and avoid opening too many new credit accounts. Regularly review your credit report for errors and work to reduce outstanding debts.");
+            } else if (input.toLowerCase().includes('compound interest')) {
+                speak("Compound interest is interest earned on the initial principal and any accumulated interest. It allows your savings or investments to grow faster over time as interest is earned on both the initial amount and the interest already earned.");
+            } else if (input.toLowerCase().includes('start a budget')) {
+                speak("Start a budget by tracking your income and expenses. Categorize expenses and identify areas where you can cut back. Allocate a portion of your income to savings and investments. Consider using budgeting apps or spreadsheets to help you manage your finances.");
+            } else if (input.toLowerCase().includes('yes')) {
+                speak("Hi there! Do you want to know how much you have saved? say your name please");
+            } else if (input.toLowerCase().includes('omwaro')) {
+                speak("Your total current saving is Ksh 3200. Is there something else you'd like to know?");
+            } else if (input.toLowerCase().includes('shem')) {
+                speak("Your total current saving is $4615. Is there something else you'd like to know?");
+            } else if (input.toLowerCase().includes('edwin')) {
+                speak("Your total current saving is  875. Is there something else you'd like to know?");
+            } else if (input.toLowerCase().includes('raila')) {
+                speak("Your total current saving is 2200. Is there something else you'd like to know?");
+            } else if (input.toLowerCase().includes('isaac')) {
+                speak("Your total current saving is Ksh $3900. Is there something else you'd like to know?");
+            } else if (input.toLowerCase().includes('bornbray')) {
+                speak("Your total current saving is Ksh 4600. Is there something else you'd like to know?");
+            } else if (input.toLowerCase().includes('peter')) {
+                speak("Your total current saving is Ksh 300. Is there something else you'd like to know?");
+            } else if (input.toLowerCase().includes('osano')) {
+                speak("Your total current saving is Ksh too low. Is there something else you'd like to know?");
+            } else if (input.toLowerCase().includes('samuel')) {
+                speak("Your total current saving is  1100. Is there something else you'd like to know?");
+            } else if (input.toLowerCase().includes('david')) {
+                speak("Your total current saving is Ksh 0. Is there something else you'd like to know?");
+            } else if (input.toLowerCase().includes('john')) {
+                speak("Your total current saving is Ksh 1700. Is there something else you'd like to know?");
+            } else if (input.toLowerCase().includes('billy')) {
+                speak("Your total current saving is Ksh. Is there something else you'd like to know?");
+            } else if (input.toLowerCase().includes('i want to withdraw')) {
+                speak("Sure, you can request a loan or make a deposit. Please say or type 'loan' for requesting a loan or 'deposit' for making a deposit.");
+            } else if (input.toLowerCase().includes('loan')) {
+                speak("To request a loan, please fill out the loan application form on our website or visit our nearest branch. Our loan officers will review your application and get back to you as soon as possible.");
+            } else if (input.toLowerCase().includes('deposit')) {
+                speak("To make a deposit, you can visit our nearest branch and deposit cash or checks. You can also deposit via +254 793 648810.");
+            } else if (input.toLowerCase().includes('no')) {
+                speak("Alright, no problem!. If you ever need assistance, don't hesitate to reach out. Have a wonderful time!");
+            } else if (input.toLowerCase().includes('account') || input.toLowerCase().includes(' my account')) {
+                speak("Please type your name.");
+            } else if (input.toLowerCase().includes('what is your name')) {
+                speak("I'm an Financial Assistant designed to assist with a wide range of financial information. How can I help you today?");
+            } else if (input.toLowerCase().includes('your name')) {
+                speak("I'm an Financial Assistant designed to assist with a wide range of financial information. How can I help you today?");
+            } else if (input.toLowerCase().includes('what is d-pesa') || input.toLowerCase().includes('what is dpesa')) {
+                speak("D-PESA is a fascinating social media app, but I'd like to keep the details private for now. Is there anything else you'd like to know or discuss? Feel free to ask any other questions you have in mind, and I'll be happy to help!");
+            } else if (input.toLowerCase().includes('d-pesa')) {
+                speak("D-PESA is a fascinating social media app, but I'd like to keep the details private for now. Is there anything else you'd like to know or discuss? Feel free to ask any other questions you have in mind, and I'll be happy to help!");
+            } else if (input.toLowerCase().includes('when is the meeting')) {
+                speak("Our meeting is always held on the last Sunday of the month at [8:30 pm]. See you then!");
+            } else if (input.toLowerCase().includes('will you be there')) {
+                speak("Yes, I will be there to assist you during the meeting. If you have any questions or need any help, feel free to ask!");
+            } else if (input.toLowerCase().includes('sure')) {
+                speak("Great! I'll be there to support and assist you during the meeting.");
+            } else {
+                speak("I'm sorry, I didn't quite catch that.");
+            }
+        }
+    </script>
+<footer>
+    <div class="footer">
+        <h2>Talks</h2>
+        <ul>
+            <li><a href="j_attonment.html">Learn more about the Atonement</a></li>
+            <li><a href="j_plan_salvation.html">The Plan of Salvation </a></li>
+            <li><a href="j_charity.html">Charity and Loving Service </a></li>
+            <li><a href="j_love.html">The Principle of Faith </a></li>
+            <li><a href="j_Responsibility.html">Work and Responsibility</a></li>
+            <li><a href="j_restoration.html">The Restoration of Truth </a></li>
+            <li><a href="j_baptism.html">Baptism</a></li>
+            <li><a href="j_robot.html">speaking j_robot</a></li>
+            <li><a href="j_love_neighbor.html">Love for Our Neighbor </a></li>
+            <li><a href="j_holy_ghost.html">The Holy Ghost as Your Companion</a></li>
+            <li><a href="j_testimony.html">Talk about Testimony</a></li>
+            <li><a href="j_testimoney.html">Testimony</a></li>
+            <li><a href="j_christlike.html">Christ-like Attributes</a></li>
+            <li><a href="j_repentance.html">The Gift of Repentance</a></li>
+        </ul>
+    </div>
+    <p class="copyright">© 2023 rayonsdjibouti. All rights reserved.</p>
+
+</footer>
+
+</html>

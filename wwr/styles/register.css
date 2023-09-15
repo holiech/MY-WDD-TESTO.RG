@@ -1,0 +1,178 @@
+/* Your existing CSS styles */
+
+/* ... */
+
+/* Additional CSS styles for the login form */
+.login-form-container, .create-account-form-container {
+    display: none; /* Hide the login form by default */
+    margin: 20px auto;
+    max-width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+  }
+  
+  .login-form-container.visible {
+    display: block; /* Show the login form when the "Register Now" link is clicked */
+  }
+  .create-account-form-container.visible {
+    display: block; /* Show the login form when the "Register Now" link is clicked */
+  }
+  
+  .login-form-container, .create-account-form-container h2 {
+    margin-bottom: 10px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input[type="text"],
+  .form-group input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .form-group button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .form-group button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* ... Additional CSS styles for your other elements ... */
+  /* Reset default margin and padding for all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url("imaghes/fam_8.jpg");
+    background-size: cover; /* Adjust the background size as needed */
+    background-origin: 100%;
+    background-position: center center;
+    background-color: #ccc;
+  }
+  
+  header {
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 5px solid #9f0e0e;
+    background-color: white;
+    position: fixed;
+    width: 100%;
+    z-index: 9999; /* Set a high z-index to keep it above other elements */
+}
+    
+  
+  .logo img{
+    width: 70px;
+    justify-content: left;
+  }
+
+    nav{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding-right: 8%;
+  }
+    
+  
+  nav a {
+    text-decoration: none;
+    color: #333;
+
+  }
+  
+  /* Add space between navigation links */
+  nav a:not(:last-child) {
+    margin: 0 9px;
+    text-align: center;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  /* Additional CSS styles for the rest of the page can go here */
+  
+  /* Slideshow background */
+  .slideshow-container {
+    position: relative;
+    max-width: 100%;
+    height: 100%; /* Set the height of the slideshow container */
+    margin: auto;
+  }
+  
+  .slideshow-container div img {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+  }
+
+  
+  .slide-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    color: #fff;
+    padding: 100px;
+    margin: 0;
+    align-items: center;
+  }
+  
+  .slide-text h2,
+  .slide-text p {
+    text-align: center; /* Center the heading and paragraph text */
+  }
+  
+  .slide-text h2 {
+    margin-bottom: 10px; /* Add some spacing between heading and paragraph */
+  }
+  
+
+  .registration-button-container {
+    text-align: center;
+    margin-top: 70px; /* Add spacing between the slide container and button container */
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+  }
+  
+  .register-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 9px 18px;
+    text-decoration: none;
+    border-radius: 20px;
+  }
+  
+  .register-button:hover {
+    background-color: #0056b3;
+  }

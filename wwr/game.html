@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/game.css">
+    <title>Rock Paper Scissors Game</title>
+    <style>
+        
+        /* CSS styles (same as previous code) */
+        /* ... */
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+          <img src="images/logos.png" alt="logo">
+        </div>
+        <nav>
+          <a href="page.html">Page</a>
+          <a href="about.html">About Us</a>
+          <a href="home.html">Home</a>
+          <a href="contuct.html">Contact Us</a>
+          <a href="game.html"> Games</a>
+        </nav>
+      </header>
+    
+    <h1>Rock Paper Scissors Game</h1>
+    <div class="choices">
+        <div class="choice" onclick="play('rock')">Rock</div>
+        <div class="choice" onclick="play('paper')">Paper</div>
+        <div class="choice" onclick="play('scissors')">Scissors</div>
+    </div>
+    <div class="result" id="result"></div>
+    <div class="score" id="score">Player: 0 | Computer: 0 | Turns: 0 / 10</div>
+    <button onclick="resetGame()">Reset Game</button>
+
+    <script>
+        let playerScore = 0;
+        let computerScore = 0;
+        let totalTurns = 0;
+        const maxTurns = 10;
+        let gameOver = false;
+
+        function play(userChoice) {
+            if (!gameOver && totalTurns < maxTurns) {
+                const choices = ["rock", "paper", "scissors"];
+                const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+
+                const result = determineWinner(userChoice, computerChoice);
+
+                const resultElement = document.getElementById("result");
+                resultElement.textContent = `You chose ${userChoice}. The computer chose ${computerChoice}. ${result}`;
+
+                updateScore(result);
+                totalTurns++;
+                if (totalTurns === maxTurns) {
+                    showFinalResult();
+                }
+            }
+        }
+
+        function determineWinner(userChoice, computerChoice) {
+            if (userChoice === computerChoice) {
+                return "It's a tie!";
+            } else if (
+                (userChoice === "rock" && computerChoice === "scissors") ||
+                (userChoice === "paper" && computerChoice === "rock") ||
+                (userChoice === "scissors" && computerChoice === "paper")
+            ) {
+                playerScore++;
+                return "You win!";
+            } else {
+                computerScore++;
+                return "You lose!";
+            }
+        }
+
+        function updateScore(result) {
+            const scoreElement = document.getElementById("score");
+            scoreElement.textContent = `Player: ${playerScore} | Computer: ${computerScore} | Turns: ${totalTurns} / ${maxTurns}`;
+        }
+
+        // (Previous code)
+
+        function showFinalResult() {
+            const resultElement = document.getElementById("result");
+            if (playerScore > computerScore) {
+                resultElement.textContent = "🎉 Congratulations GEF! You win the game! 🏆🏆🥇";
+            } else if (playerScore < computerScore) {
+                resultElement.textContent = "Sorry, you lost the game. 😔";
+            } else {
+                resultElement.textContent = "It's a tie! Good game. 😊";
+            }
+            gameOver = true;
+        }
+        
+
+        function resetGame() {
+            playerScore = 0;
+            computerScore = 0;
+            totalTurns = 0;
+            gameOver = false;
+            const resultElement = document.getElementById("result");
+            resultElement.textContent = "";
+            const scoreElement = document.getElementById("score");
+            scoreElement.textContent = "Player: 0 | Computer: 0 | Turns: 0 / 10";
+        }
+    </script>
+    <footer>
+        <section>
+        <div class="explore-link">
+            <a href="snake.html">Explore More Games</a>
+        </div
+    </section>
+    
+    </footer>
+    
+</body>
+</html>

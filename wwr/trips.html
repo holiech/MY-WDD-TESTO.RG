@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .container button {
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .u button {
+    background-color: #5500ff; /* Blue color */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px; /* Add margin for spacing */
+  }
+
+  
+  .u button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    justify-content: space-between;
+
+  }
+
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+  }
+
+  th {
+    background-color: yellow;
+  }
+
+  /* Add alternate row background colors */
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:nth-child(odd) {
+    background-color: #ffffff;
+  }
+
+  /* Responsive design for smaller screens */
+  @media screen and (max-width: 400px) {
+    table {
+      font-size: 12px;
+    }
+
+    th, td {
+      padding: 5px;
+    }
+  }
+</style>
+<title>Table with CSS and JS</title>
+</head>
+<body>
+
+<div class="container">
+  <div class="u">
+    
+    <button onclick="prevDataSet()">Previous</button>
+    <button onclick="nextDataSet()">Next</button>
+    <button onclick="downloadTable()">Download Table</button>
+  </div>
+  <div id="success-message" class="message" style="display: none;">
+    Table downloaded successfully! Don't forget to post it in the WhatsApp group.
+    "YOU ARE THE BEST" check your download.
+  </div>
+  <h2 id="data-set-title">Data Set 1</h2>
+
+  <table id="data-table">
+    <tr>
+      <th>WEEK 32</th>
+      <th>LAST NAME</th>
+      <th>Registration</th>
+      <th>Group Saving</th>
+      <th>Personal a/c</th>
+      <th>RATE</th>
+      <th>MAX</th>
+      <th>LOAN RATE</th>
+      <th>LOAN</th>
+      <th>INTREST</th>
+    </tr>
+  </table>
+</div>
+
+<script>
+  const dataSets = [
+    {
+      title: "WEEK 31 ",
+      data: [
+      ["FIRST..N", "LAST NAME", "RIGISTRATION", "GROUP SAVING", "PERSONAL SAVING", "RARE", "$MAX", "LOAN RATE", "LOAN", "INTREST"],
+      ["Odhiabo", "Clifford", "$100.00",       "$0.00",  "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Oliech", "Shem", "$100.00",            "$0.00",  "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Otieno", "bornbray", "$100.00",        "$100.00","$500.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["kochiko", "Samuel", "$100.00",         "$0.00",  "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Okoth"  , "Peter", "$100.00",          "$0.00",  "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Oliech", "Raila", "$100.00",           "$100.00","$100.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Omwaro", "Peter", "$100.00",           "$100.00","$100.00", "80%", "$80.00", "20%", "$0.00", "$0.00"],
+      ["Amolo", "John", "$100.00",             "$100.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Aaron", "Billy", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Opiyo", "Phelix", "$100.00",           "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Naph", "Audrey", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Omondi", "Meshark", "$100.00",         "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Osano", "Cynthia", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Odongo", "Zaddock", "$100.00",         "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Ochieng", "Javan", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Magak", "Edwin", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Ochieng", "Devid", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Okoth", "Isaac", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["kochiko", "Stive", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      // Add more data rows here
+      ["Total", "", "", "$1,100.00", "", "$4,500.00", "", "$0.00", "", "$0.00"],
+      ]
+    },
+    {
+      title: "WEEK 32  AUG .w3",
+      data: [
+      ["FIRST..N", "LAST NAME", "RIGISTRATION", "GROUP SAVING", "PERSONAL SAVING", "RARE", "$MAX", "LOAN RATE", "LOAN", "INTREST"],
+      ["Odhiabo", "Clifford", "$100.00",       "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Oliech", "Shem", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Otieno", "bornbray", "$100.00",        "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["kochiko", "Samuel", "$100.00",         "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Okoth"  , "Peter", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Oliech", "Raila", "$100.00",           "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Omwaro", "Peter", "$100.00",           "$100.00", "$100.00", "80%", "$80.00", "20%", "$0.00", "$0.00"],
+      ["Amolo", "John", "$100.00",             "$100.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Aaron", "Billy", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Opiyo", "Phelix", "$100.00",           "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Naph", "Audrey", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Omondi", "Meshark", "$100.00",         "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Osano", "Cynthia", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Odongo", "Zaddock", "$100.00",         "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Ochieng", "Javan", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Magak", "Edwin", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Ochieng", "Devid", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Okoth", "Isaac", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["kochiko", "Stive", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      // Add more data rows here
+      ["Total", "", "", "$1,100.00", "", "$4,500.00", "", "$0.00", "", "$0.00"],
+        // Add more rows here
+      ]
+    },
+    {
+      title: "WEEK 33  AUG .w4",
+      data: [
+      ["FIRST..N", "LAST NAME", "RIGISTRATION", "GROUP SAVING", "PERSONAL SAVING", "RARE", "$MAX", "LOAN RATE", "LOAN", "INTREST"],
+      ["Odhiabo", "Clifford", "$100.00",       "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Oliech", "Shem", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Otieno", "bornbray", "$100.00",        "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["kochiko", "Samuel", "$100.00",         "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Okoth"  , "Peter", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Oliech", "Raila", "$100.00",           "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Omwaro", "Peter", "$100.00",           "$100.00", "$100.00", "80%", "$80.00", "20%", "$0.00", "$0.00"],
+      ["Amolo", "John", "$100.00",             "$100.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Aaron", "Billy", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Opiyo", "Phelix", "$100.00",           "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Naph", "Audrey", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Omondi", "Meshark", "$100.00",         "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Osano", "Cynthia", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Odongo", "Zaddock", "$100.00",         "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Ochieng", "Javan", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Magak", "Edwin", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Ochieng", "Devid", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Okoth", "Isaac", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["kochiko", "Stive", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      // Add more data rows here
+      ["Total", "", "", "$1,100.00", "", "$4,500.00", "", "$0.00", "", "$0.00"],
+        // Add more rows here
+      ]
+    },
+
+    {
+      title: "WEEK 34  SEP .w1",
+      data: [
+      ["FIRST..N", "LAST NAME", "RIGISTRATION", "GROUP SAVING", "PERSONAL SAVING", "RARE", "$MAX", "LOAN RATE", "LOAN", "INTREST"],
+      ["Odhiabo", "Clifford", "$100.00",       "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Oliech", "Shem", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Otieno", "bornbray", "$100.00",        "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["kochiko", "Samuel", "$100.00",         "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Okoth"  , "Peter", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Oliech", "Raila", "$100.00",           "$100.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Omwaro", "Peter", "$100.00",           "$100.00","$100.00", "80%", "$80.00", "20%", "$0.00", "$0.00"],
+      ["Amolo", "John", "$100.00",             "$100.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Aaron", "Billy", "$100.00",            "$100.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Opiyo", "Phelix", "$100.00",           "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Naph", "Audrey", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Omondi", "Meshark", "$100.00",         "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Osano", "Cynthia", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Odongo", "Zaddock", "$100.00",         "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Ochieng", "Javan", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Magak", "Edwin", "$100.00",            "$100.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Ochieng", "Devid", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Okoth", "Isaac", "$100.00",            "$100.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["kochiko", "Stive", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      // Add more data rows here
+      ["Total", "", "", "$1,100.00", "", "$4,500.00", "", "$0.00", "", "$0.00"],
+        // Add more rows here
+      ]
+    },
+
+
+    {
+      title: "WEEK 35  SEP .w2",
+      data: [
+      ["FIRST..N", "LAST NAME", "RIGISTRATION", "GROUP SAVING", "PERSONAL SAVING", "RARE", "$MAX", "LOAN RATE", "LOAN", "INTREST"],
+      ["Odhiabo", "Clifford", "$100.00",       "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Oliech", "Shem", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Otieno", "bornbray", "$100.00",        "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["kochiko", "Samuel", "$100.00",         "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Okoth"  , "Peter", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Oliech", "Raila", "$100.00",           "$100.00", "$1000.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Omwaro", "Peter", "$100.00",           "$100.00","$100.00", "80%", "$80.00", "20%", "$0.00", "$0.00"],
+      ["Amolo", "John", "$100.00",             "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Aaron", "Billy", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Opiyo", "Phelix", "$100.00",           "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Naph", "Audrey", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Omondi", "Meshark", "$100.00",         "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Osano", "Cynthia", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Odongo", "Zaddock", "$100.00",         "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Ochieng", "Javan", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Magak", "Edwin", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Ochieng", "Devid", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Okoth", "Isaac", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["kochiko", "Stive", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      // Add more data rows here
+      ["Total", "", "", "$1,100.00", "", "$4,500.00", "", "$0.00", "", "$0.00"],
+        // Add more rows here
+      ]
+    },
+
+
+    {
+      title: "WEEK 36  SEP .w3",
+      data: [
+      ["FIRST..N", "LAST NAME", "RIGISTRATION", "GROUP SAVING", "PERSONAL SAVING", "RARE", "$MAX", "LOAN RATE", "LOAN", "INTREST"],
+      ["Odhiabo", "Clifford", "$100.00",       "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Oliech", "Shem", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Otieno", "bornbray", "$100.00",        "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["kochiko", "Samuel", "$100.00",         "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Okoth"  , "Peter", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Oliech", "Raila", "$100.00",           "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Omwaro", "Peter", "$100.00",           "$100.00","$100.00", "80%", "$80.00", "20%", "$1000.00", "$200.00"],
+      ["Amolo", "John", "$100.00",             "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Aaron", "Billy", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Opiyo", "Phelix", "$100.00",           "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Naph", "Audrey", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Omondi", "Meshark", "$100.00",         "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Osano", "Cynthia", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Odongo", "Zaddock", "$100.00",         "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Ochieng", "Javan", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Magak", "Edwin", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Ochieng", "Devid", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Okoth", "Isaac", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["kochiko", "Stive", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      // Add more data rows here
+      ["Total", "", "", "$1,100.00", "", "$4,500.00", "", "$0.00", "", "$0.00"],
+        // Add more rows here
+      ]
+    },
+
+
+
+    {
+      title: "WEEK 37  SEP .w4",
+      data: [
+      ["FIRST..N", "LAST NAME", "RIGISTRATION", "GROUP SAVING", "PERSONAL SAVING", "RARE", "$MAX", "LOAN RATE", "LOAN", "INTREST"],
+      ["Odhiabo", "Clifford", "$100.00",       "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Oliech", "Shem", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Otieno", "bornbray", "$100.00",        "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["kochiko", "Samuel", "$100.00",         "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Okoth"  , "Peter", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Oliech", "Raila", "$100.00",           "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Omwaro", "Peter", "$100.00",           "$0.00","$100.00", "80%", "$80.00", "20%", "$0.00", "$0.00"],
+      ["Amolo", "John", "$100.00",             "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Aaron", "Billy", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Opiyo", "Phelix", "$100.00",           "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Naph", "Audrey", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Omondi", "Meshark", "$100.00",         "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Osano", "Cynthia", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Odongo", "Zaddock", "$100.00",         "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Ochieng", "Javan", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Magak", "Edwin", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Ochieng", "Devid", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["Okoth", "Isaac", "$100.00",            "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      ["kochiko", "Stive", "$100.00",          "$0.00", "$0.00", "80%", "$0.00", "20%", "$0.00", "$0.00"],
+      // Add more data rows here
+      ["Total", "", "", "$1,100.00", "", "$4,500.00", "", "$0.00", "", "$0.00"],
+        // Add more rows here
+      ]
+    },
+
+    {
+      title: "WEEK 38 OCT COMING SOON........",
+      data: [
+      ["FIRST..N", "LAST NAME", "RIGISTRATION", "GROUP SAVING", "PERSONAL SAVING", "RARE", "$MAX", "LOAN RATE", "LOAN", "INTREST"],
+      ['HATUJAFIKA HUKU MKUBWA','🤣🤣🤣🤣🤣']
+
+        // Add more rows here
+      ]
+    }
+    
+
+    
+    // Add more data sets here
+  ]
+
+  let currentDataSetIndex = 0;
+
+  const table = document.getElementById("data-table");
+  const title = document.getElementById("data-set-title");
+
+  function prevDataSet() {
+    currentDataSetIndex = (currentDataSetIndex - 1 + dataSets.length) % dataSets.length;
+    updateTable();
+  }
+
+  function nextDataSet() {
+    currentDataSetIndex = (currentDataSetIndex + 1) % dataSets.length;
+    updateTable();
+  }
+
+  function updateTable() {
+    const currentDataSet = dataSets[currentDataSetIndex];
+    title.textContent = currentDataSet.title;
+    table.innerHTML = "";
+
+    const headerRow = document.createElement("tr");
+    currentDataSet.data[0].forEach(cellData => {
+      const cell = document.createElement("th");
+      cell.textContent = cellData;
+      headerRow.appendChild(cell);
+    });
+    table.appendChild(headerRow);
+
+    currentDataSet.data.slice(1).forEach(rowData => {
+      const row = document.createElement("tr");
+      rowData.forEach((cellData, cellIndex) => {
+        const cell = document.createElement("td");
+        cell.textContent = cellData;
+        
+        // Add different background color to column 5
+        if (cellIndex === 4) {
+          cell.style.backgroundColor = getRandomColor();
+        }
+        
+        row.appendChild(cell);
+      });
+      table.appendChild(row);
+    });
+  }
+
+  function getRandomColor() {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
+  updateTable();
+
+  function downloadTable() {
+    const table = document.getElementById("data-table");
+
+    // Create an HTML container element to hold the table and its styles
+    const container = document.createElement("div");
+    container.innerHTML = `<style>${document.head.innerHTML}</style>${table.outerHTML}`;
+
+    // Get the entire table's HTML including styles
+    const tableHTML = container.innerHTML;
+
+    // Create a Blob with the table's HTML
+    const blob = new Blob([tableHTML], { type: "text/html;charset=utf-8;" });
+
+    // Create a download link and simulate click to trigger download
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "investment table😍";
+    link.style.display = "none";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    const successMessage = document.getElementById("success-message");
+    successMessage.style.display = "block";
+
+    // You can also send a browser notification or other forms of communication here
+    // For example, sending a browser notification
+    if ('Notification' in window && Notification.permission === 'granted') {
+      new Notification('Download Successful', {
+        body: 'Don\'t forget to post it in the WhatsApp group!',
+        icon: 'icon.png' // You can specify an icon image
+      });
+    }
+  }
+  
+  // Rest of your JavaScript code
+</script>
+<a href="trik_intrest.html">click, LOAN INTREST</a> <br><br><a href="trip.html">BACK</a>
+
+</body>
+</html>

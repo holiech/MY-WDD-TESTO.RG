@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cultivating Christ-like Attributes</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+  .highlight {
+    background-color: #ffcc80; /* Highlight color */
+  }
+  button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Cultivating Christ-like Attributes</h1>
+  <p>Dear brothers and sisters, as we strive to follow the example of our Savior Jesus Christ, we are called to develop and nurture Christ-like attributes in our lives. These attributes reflect His divine character and enable us to become more like Him. They are the foundation of our discipleship and the key to our eternal progression.</p>
+  <p><strong>Humility:</strong> One of the most essential Christ-like attributes is humility. Christ exemplified this attribute throughout His mortal ministry. He, the King of Kings, knelt down to wash the feet of His disciples, teaching us that true greatness comes from serving others selflessly. Humility allows us to recognize our dependence on God and our need for His grace in our lives. (See Philippians 2:5-8)</p>
+  <p><strong>Charity:</strong> Christ's love for all is best captured in the principle of charity. Charity is not just giving to those in need; it is a pure love that encompasses compassion, kindness, and selflessness. It is seeing others as God sees them and striving to lift their burdens. As we develop charity, we align our hearts with Christ's divine nature. (See 1 Corinthians 13:4-7)</p>
+  <p><strong>Patience:</strong> In a world of instant gratification, patience is a Christ-like attribute that often challenges us. Christ demonstrated remarkable patience in His interactions with others, even in the face of adversity. Patience helps us endure trials, maintain faith during challenges, and extend understanding to those around us. (See James 5:11)</p>
+  <p><strong>Forgiveness:</strong> Christ's atoning sacrifice is the ultimate act of forgiveness. He forgave those who crucified Him, teaching us the importance of forgiving others. Forgiveness frees us from the burden of resentment and enables us to experience the healing power of Christ's love. As we forgive, we emulate His divine example. (See Ephesians 4:32)</p>
+  <p><strong>Kindness:</strong> Kindness is a Christ-like attribute that touches hearts and changes lives. Christ's interactions with individuals from all walks of life demonstrated His genuine kindness and concern. Kindness is not just a superficial act but a reflection of a heart filled with love and empathy. When we are kind, we spread Christ's love to others. (See Ephesians 4:32)</p>
+  <p><strong>Obedience:</strong> Christ's perfect obedience to the Father's will stands as a shining example for us. Obedience is not merely following rules; it is aligning our will with God's and seeking to do His work. Obedience to God's commandments brings blessings and draws us closer to the Savior. (See John 14:15)</p>
+  <p>In conclusion, dear friends, cultivating Christ-like attributes is a lifelong endeavor that transforms us into His disciples. These attributes—humility, charity, patience, forgiveness, kindness, and obedience—elevate our character and enable us to fulfill our divine potential. As we strive to emulate our Savior, we invite His spirit into our lives and become instruments of His peace and love. May we embrace these attributes with humility and dedication, striving to become more like Him each day. I bear witness of the reality of these attributes in the life of our Savior and invite each of us to develop them in our own lives. In the name of Jesus Christ, amen.</p>
+</div>
+<button id="readButton">Read</button>
+    <script>
+        let paragraphs = document.querySelectorAll('.container p, .container h1');
+        let currentIndex = 0;
+        let currentWordIndex = 0;
+        let reading = false;
+        let synth = window.speechSynthesis;
+
+        document.getElementById('readButton').addEventListener('click', function() {
+            if (!reading) {
+                reading = true;
+                this.innerText = 'Stop';
+                readParagraphs();
+            } else {
+                reading = false;
+                this.innerText = 'Read';
+                resetParagraphs();
+                synth.cancel(); // Stop speech synthesis
+            }
+        });
+
+        function readParagraphs() {
+            if (currentIndex < paragraphs.length && reading) {
+                paragraphs[currentIndex].classList.add('highlight'); // Highlight the element being read
+                paragraphs[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' }); // Scroll to the element
+                let text = paragraphs[currentIndex].textContent;
+                let words = text.split(' '); // Split the text into words
+                let utterance = new SpeechSynthesisUtterance(text);
+                utterance.onboundary = function(event) {
+                    if (event.name === 'word') {
+                        highlightWord(currentWordIndex);
+                        currentWordIndex++;
+                    }
+                };
+                utterance.onend = function() {
+                    paragraphs[currentIndex].classList.remove('highlight'); // Remove the highlight after reading
+                    currentWordIndex = 0;
+                    currentIndex++;
+                    readParagraphs(); // Read next element
+                };
+                utterance.onerror = function(event) {
+                    console.error('An error occurred while processing the speech synthesis:', event.error);
+                    currentIndex++;
+                    readParagraphs(); // Continue to the next element
+                };
+                synth.speak(utterance); // Start speech synthesis
+            } else {
+                currentIndex = 0;
+                currentWordIndex = 0;
+                resetParagraphs();
+            }
+        }
+
+        function highlightWord(index) {
+            paragraphs[currentIndex].innerHTML = paragraphs[currentIndex].innerHTML.replace(/<\/?mark>/g, ''); // Remove existing highlights
+            let words = paragraphs[currentIndex].textContent.split(' ');
+            if (words[index] !== undefined) {
+                words[index] = `<mark>${words[index]}</mark>`; // Wrap the word in <mark> tags
+                paragraphs[currentIndex].innerHTML = words.join(' '); // Update the paragraph content
+            }
+        }
+
+        function resetParagraphs() {
+            paragraphs.forEach(paragraph => {
+                paragraph.classList.remove('highlight');
+                paragraph.innerHTML = paragraph.textContent; // Reset paragraph content to remove highlights
+            });
+        }
+    </script>
+</body>
+<footer>
+    <div class="footer">
+        <h2>Talks</h2>
+        <ul>
+            <li><a href="j_attonment.html">Learn more about the Atonement</a></li>
+            <li><a href="j_plan_salvation.html">The Plan of Salvation </a></li>
+            <li><a href="j_charity.html">Charity and Loving Service </a></li>
+            <li><a href="j_love.html">The Principle of Faith </a></li>
+            <li><a href="j_Responsibility.html">Work and Responsibility</a></li>
+            <li><a href="j_restoration.html">The Restoration of Truth </a></li>
+            <li><a href="j_baptism.html">Baptism</a></li>
+            <li><a href="j_robot.html">speaking j_robot</a></li>
+            <li><a href="j_love_neighbor.html">Love for Our Neighbor </a></li>
+            <li><a href="j_holy_ghost.html">The Holy Ghost as Your Companion</a></li>
+            <li><a href="j_testimony.html">Talk about Testimony</a></li>
+            <li><a href="j_testimoney.html">Testimony</a></li>
+            <li><a href="j_christlike.html">Christ-like Attributes</a></li>
+            <li><a href="j_repentance.html">The Gift of Repentance</a></li>
+        </ul>
+    </div>
+    <p class="copyright">© 2023 rayonsdjibouti. All rights reserved.</p>
+
+</footer>
+
+</html>
