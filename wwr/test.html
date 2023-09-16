@@ -144,7 +144,7 @@
 
             <div class="question">
                 <p>10. Are there any specific features or investment products you would like to see us offer in the future?</p>
-                <textarea name="q10" rows="4" cols="50"></textarea>
+                <textarea name="q10" rows="3" cols="50"></textarea>
             </div>
 
             <div class="question">
@@ -226,49 +226,24 @@
             }
         }
 
-        function validateForm() {
-            var allQuestionsAnswered = true;
+        function submitForm() {
+            // Here, you can collect and process the user's feedback
+            var feedbackData = {};
 
-            // Check if all radio button questions are answered
             for (var i = 1; i <= questions.length; i++) {
                 var question = document.querySelector('input[name="q' + i + '"]:checked');
-                if (!question) {
-                    allQuestionsAnswered = false;
-                    break;
-                }
+                feedbackData['q' + i] = question ? question.value : '';
             }
 
-            // Check if the textarea question is answered
-            var textareaAnswer = document.querySelector('textarea[name="q5"]').value.trim();
-            if (textareaAnswer === '') {
-                allQuestionsAnswered = false;
-            }
+            feedbackData['q5'] = document.querySelector('textarea[name="q5"]').value;
 
-            return allQuestionsAnswered;
-        }
+            // You can now send this feedbackData to your server or perform any other actions as needed
 
-        function submitForm() {
-            if (validateForm()) {
-                // All questions are answered, proceed with form submission
-                var feedbackData = {};
-
-                for (var i = 1; i <= questions.length; i++) {
-                    var question = document.querySelector('input[name="q' + i + '"]:checked');
-                    feedbackData['q' + i] = question ? question.value : '';
-                }
-
-                feedbackData['q5'] = document.querySelector('textarea[name="q5"]').value;
-
-                // You can now send this feedbackData to your server or perform any other actions as needed
-
-                alert('Thank you for providing your feedback!');
-            } else {
-                // Display an error message
-                alert('Please answer all questions before submitting the form.');
-            }
+            alert('Thank you for providing your feedback!');
         }
 
         showQuestion(currentQuestion);
     </script>
+   
 </body>
 </html>

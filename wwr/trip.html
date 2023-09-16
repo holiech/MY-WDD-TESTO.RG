@@ -91,7 +91,7 @@
     <a href="trips.html">WEAKLY SVG</a>
   </Div>
   <div class="hm">
-    <a href="test.html" onclick="promptForCode(); return True;">SVY</a>>
+    <a href="test.html" onclick="promptForCode(); return false;">SVY</a>
 </div>
   <div class="home">
     <a href="index.html">Account</a>
@@ -276,21 +276,23 @@
   <br>
     <a href="home.html">back home.. </a>
   <p>DATE: 8/02/2023</p>
-  <script>
-      function promptForCode() {
-          // Prompt the user to enter the code
-          var enteredCode = prompt('Please enter the code to access the survey:');
+  <a href="test.html" onclick="promptForCode(); return false;">Click here to access the survey</a>
 
-          // Check if the entered code is correct ("2323")
-          if (enteredCode === '2323') {
-              // If the code is correct, allow access to the test.html page
-              window.location.href = 'test.html';
-          } else {
-              // If the code is incorrect or canceled, display an error message
-              alert('Access denied. Incorrect code or code not entered.');
-          }
-      }
-  </script>
+  <script>
+    function promptForCode() {
+        // Prompt the user to enter the code
+        var enteredCode = prompt('Please enter the code to access the survey:');
+
+        // Check if the entered code is correct ("2323")
+        if (enteredCode === '2323') {
+            // If the code is correct, allow access to the test.html page
+            window.location.href = 'test.html';
+        } else {
+            // If the code is incorrect or canceled, display an error message
+            alert('Access denied. Incorrect code or code not entered.');
+        }
+    }
+</script>
 </body>
 </html>
 
