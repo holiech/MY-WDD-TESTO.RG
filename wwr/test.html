@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Investment Feedback</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .questionnaire {
+            width: 80%;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        p {
+            text-align: center;
+            color: #666;
+        }
+
+        .question {
+            display: none;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <a href="trip.html">BACK</a>
+    <div class="questionnaire">
+        <h1>Investment Feedback</h1>
+        <p>We value your feedback about your investment experience with us. Please share your thoughts and suggestions to help us improve our services.</p>
+        <form id="feedbackForm">
+            <div class="question">
+                <p>1. How would you describe your overall experience with our investment services?</p>
+                <input type="radio" name="q1" value="Strongly Agree">Strongly Agree
+                <input type="radio" name="q1" value="Agree">Agree
+                <input type="radio" name="q1" value="Neutral">Neutral
+                <input type="radio" name="q1" value="Disagree">Disagree
+                <input type="radio" name="q1" value="Strongly Disagree">Strongly Disagree
+            </div>
+
+            <div class="question">
+                <p>2. Did our investment options align with your financial goals and risk tolerance?</p>
+                <input type="radio" name="q2" value="Yes">Yes
+                <input type="radio" name="q2" value="No">No
+            </div>
+
+            <div class="question">
+                <p>3. Were are ending our investment team on December, how do you feel about</p>
+                <input type="radio" name="q3" value="Strongly Agree">Strongly happy
+                <input type="radio" name="q3" value="Agree">Not too bad
+                <input type="radio" name="q3" value="Neutral">just fine
+                <input type="radio" name="q3" value="Disagree">Disagree
+                <input type="radio" name="q3" value="Strongly Disagree">Strongly Disagree
+            </div>
+
+            <div class="question">
+                <p>4. Did you find our investment reports and statements clear and informative?</p>
+                <input type="radio" name="q4" value="Strongly Agree">Strongly Agree
+                <input type="radio" name="q4" value="Agree">Agree
+                <input type="radio" name="q4" value="Neutral">Neutral
+                <input type="radio" name="q4" value="Disagree">Disagree
+                <input type="radio" name="q4" value="Strongly Disagree">Strongly Disagree
+            </div>
+
+            <div class="question">
+                <p>5. Were there any specific investments or strategies that you found particularly beneficial or concerning?</p>
+                <textarea name="q5" rows="4" cols="50"></textarea>
+            </div>
+
+            <div class="question">
+                <p>6. How do you rate the ease of accessing your investment accounts and information online?</p>
+                <input type="radio" name="q6" value="Strongly Agree">Strongly Agree
+                <input type="radio" name="q6" value="Agree">Agree
+                <input type="radio" name="q6" value="Neutral">Neutral
+                <input type="radio" name="q6" value="Disagree">Disagree
+                <input type="radio" name="q6" value="Strongly Disagree">Strongly Disagree
+            </div>
+
+            <div class="question">
+                <p>7. Did you experience any challenges or issues during your investment journey with us?</p>
+                <textarea name="q7" rows="4" cols="50"></textarea>
+            </div>
+
+            <div class="question">
+                <p>8. How likely are you to recommend our investment services to others?</p>
+                <input type="radio" name="q8" value="Strongly Agree">Strongly Agree
+                <input type="radio" name="q8" value="Agree">Agree
+                <input type="radio" name="q8" value="Neutral">Neutral
+                <input type="radio" name="q8" value="Disagree">Disagree
+                <input type="radio" name="q8" value="Strongly Disagree">Strongly Disagree
+            </div>
+
+            <div class="question">
+                <p>9. Do you have any additional comments or suggestions for improving our investment services?</p>
+                <textarea name="q9" rows="4" cols="50"></textarea>
+            </div>
+
+            <div class="question">
+                <p>10. Are there any specific features or investment products you would like to see us offer in the future?</p>
+                <textarea name="q10" rows="4" cols="50"></textarea>
+            </div>
+
+            <div class="question">
+                <p>11. Has this investment helped you achieve your financial goals?</p>
+                <input type="radio" name="q11" value="Yes">Yes
+                <input type="radio" name="q11" value="No">No
+            </div>
+
+            <div class="question">
+                <p>12. Did you face any challenges while working with us?</p>
+                <textarea name="q12" rows="4" cols="50"></textarea>
+            </div>
+
+            <div class="question">
+                <p>13. Did you receive your loan on time?</p>
+                <input type="radio" name="q13" value="Yes">Yes
+                <input type="radio" name="q13" value="No">No
+            </div>
+
+            <div class="question">
+                <p>14. How do you rate your overall experience with our investment team?</p>
+                <input type="radio" name="q14" value="Excellent">Excellent
+                <input type="radio" name="q14" value="Good">Good
+                <input type="radio" name="q14" value="Average">Average
+                <input type="radio" name="q14" value="Fair">Fair
+                <input type="radio" name="q14" value="Poor">Poor
+            </div>
+
+            <div class="question">
+                <p>15. Were you satisfied with our customer support services?</p>
+                <input type="radio" name="q15" value="Yes">Yes
+                <input type="radio" name="q15" value="No">No
+            </div>
+
+            <div class="buttons">
+                <button type="button" id="prevBtn" onclick="prevQuestion()" style="display: none;">Previous</button>
+                <button type="button" id="nextBtn" onclick="nextQuestion()">Next</button>
+                <button type="button" id="submitBtn" onclick="submitForm()" style="display: none;">Submit Feedback</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        var currentQuestion = 0;
+        var questions = document.querySelectorAll('.question');
+        var prevBtn = document.getElementById('prevBtn');
+        var nextBtn = document.getElementById('nextBtn');
+        var submitBtn = document.getElementById('submitBtn');
+
+        function showQuestion(index) {
+            questions[currentQuestion].style.display = 'none';
+            questions[index].style.display = 'block';
+            currentQuestion = index;
+
+            if (currentQuestion === 0) {
+                prevBtn.style.display = 'none';
+            } else {
+                prevBtn.style.display = 'inline-block';
+            }
+
+            if (currentQuestion === questions.length - 1) {
+                nextBtn.style.display = 'none';
+                submitBtn.style.display = 'inline-block';
+            } else {
+                nextBtn.style.display = 'inline-block';
+                submitBtn.style.display = 'none';
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                showQuestion(currentQuestion - 1);
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                showQuestion(currentQuestion + 1);
+            }
+        }
+
+        function validateForm() {
+            var allQuestionsAnswered = true;
+
+            // Check if all radio button questions are answered
+            for (var i = 1; i <= questions.length; i++) {
+                var question = document.querySelector('input[name="q' + i + '"]:checked');
+                if (!question) {
+                    allQuestionsAnswered = false;
+                    break;
+                }
+            }
+
+            // Check if the textarea question is answered
+            var textareaAnswer = document.querySelector('textarea[name="q5"]').value.trim();
+            if (textareaAnswer === '') {
+                allQuestionsAnswered = false;
+            }
+
+            return allQuestionsAnswered;
+        }
+
+        function submitForm() {
+            if (validateForm()) {
+                // All questions are answered, proceed with form submission
+                var feedbackData = {};
+
+                for (var i = 1; i <= questions.length; i++) {
+                    var question = document.querySelector('input[name="q' + i + '"]:checked');
+                    feedbackData['q' + i] = question ? question.value : '';
+                }
+
+                feedbackData['q5'] = document.querySelector('textarea[name="q5"]').value;
+
+                // You can now send this feedbackData to your server or perform any other actions as needed
+
+                alert('Thank you for providing your feedback!');
+            } else {
+                // Display an error message
+                alert('Please answer all questions before submitting the form.');
+            }
+        }
+
+        showQuestion(currentQuestion);
+    </script>
+</body>
+</html>
