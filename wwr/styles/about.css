@@ -132,6 +132,12 @@ section h2, p{
   margin-left: 50px; /* Adjust the margin value as desired */
 }
 
+nav {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+
+}
 
 
 
