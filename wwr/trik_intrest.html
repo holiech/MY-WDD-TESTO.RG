@@ -1,26 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interest Loan Table</title>
     <style>
+        /* Style for the table */
         table {
             border-collapse: collapse;
-            width: 80%;
-            margin: 20px auto;
+            width: 100%;
+            margin-bottom: 20px;
         }
+
         th, td {
-            border: 1px solid #ccc;
+            border: 1px solid #ddd;
             padding: 8px;
             text-align: center;
         }
+
         th {
             background-color: #f2f2f2;
         }
+
+        /* Style for verification button */
+        button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Style for profile picture container */
+        .profile-picture {
+            margin-right: 20px;
+            width: 80px; /* Adjust the width as needed */
+            right: 0%;
+        }
+
+        /* Style for the file input */
+        input[type="file"] {
+            display: none;
+        }
+
+        /* Style for circular profile picture */
+        .circular-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            clip-path: circle(50% at 50% 50%);
+        }
+
+        .upload-button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 2px 6px;
+            cursor: pointer;
+            border: none;
+        }
     </style>
 </head>
+<header>
+    <a href="trips.html">BACK</a>
+</header>
 <body>
-    <a href="trips.html">back</a>
-    <h3> ON UPDATE........ BUT YOU CALL FOR ANY CLARIFICATON</h3>
+    <div class="profile-picture">
+        <img src="" alt="Profile Picture" id="profileImage" class="circular-image">
+        <br>
+        <label for="fileInput" class="upload-button">change</label>
+        <input type="file" id="fileInput" accept="image/*" onchange="saveProfilePicture(this)">
+    </div>
     <h1>Interest and Loans Table</h1>
+    <h3>ON UPDATE........ BUT YOU CALL FOR ANY CLARIFICATON</h3>
     <table id="interestLoanTable">
         <thead>
             <tr>
@@ -37,39 +93,40 @@
                 <th>October</th>
                 <th>November</th>
                 <th>December</th>
-                <th>Total Interest</th> <!-- New column for total interest -->
+                <th>Total Interest</th>
+                <th>Verification</th>
             </tr>
         </thead>
         <tbody>
+            <!-- Table rows will be added here dynamically -->
         </tbody>
     </table>
 
     <script>
-        // Sample data for ten people
-        const data = [          //j f  m  a  M   j  J  A  S  O  N  D
-    { name: "Clifford", values: [0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0] },
-    { name: "Shem", values:     [0, 0, 0, 100, 0, 20, 0, 0, 0, 0, 0, 0] },
-    { name: "Bornbray", values: [0, 0, 100, 100, 0, 20, 0, 0, 0, 0, 0, 0] },
-    { name: "Samuel", values:   [0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0] },
-    { name: "PeterAT", values:    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
-    { name: "Raila", values:    [0, 0, 100, 100, 0, 0, 0, 0, 0, 0, 0, 0] },
-    { name: "Peter", values:    [0, 0, 100, 0, 0, 0, 0, 0, 200, 0, 0, 0] },
-    { name: "John", values:     [0, 0, 200, 200, 0, 0, 0, 0, 0, 0, 0, 0] },
-    { name: "Billy", values:    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
-    { name: "Phelix", values:   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
-    { name: "Audrey", values:   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
-    { name: "Meshark", values:  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
-    { name: "Cynthia", values:  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
-    { name: "Zaddock", values:  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
-    { name: "Javan", values:    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
-    { name: "Edwin", values:    [0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
-    { name: "Devid", values:    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
-    { name: "Isaac", values:    [0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
-    { name: "Stive", values:    [0, 0, 0, 80, 0, 0, 0, 0, 0, 0, 0, 0] }
-];
+        // Sample data for 20 people
+        const data = [
+            { name: "Clifford", values: [0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+            { name: "Shem", values: [0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+            { name: "Bornbray", values: [0, 0, 100, 100, 0, 0, 0, 200, 0, 0, 0, 0] },
+            { name: "Samuel", values: [0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0] },
+            { name: "PeterAT", values: [0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+            { name: "Raila", values: [0, 0, 100, 100, 0, 100, 0, 200, 0, 0, 0, 0] },
+            { name: "Peter", values: [0, 0, 100, 0, 0, 200, 100, 0, 200, 0, 0, 0] },
+            { name: "John", values: [0, 0, 200, 200, 0, 0, 0, 0, 0, 0, 0, 0] },
+            { name: "Billy", values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+            { name: "Phelix", values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+            { name: "Audrey", values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+            { name: "Meshark", values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+            { name: "Cynthia", values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+            { name: "Zaddock", values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+            { name: "Javan", values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+            { name: "Edwin", values: [0, 0, 100, 0, 0, 0, 0, 0, 100, 0, 0, 0] },
+            { name: "Devid", values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+            { name: "Isaac", values: [0, 0, 100, 0, 0, 0, 400, 0, 0, 200, 0, 0] },
+            { name: "Stive", values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] }
+        ];
 
-
-        // Function to calculate the total interest for each person
+        // Function to calculate total interest for an array of values
         function calculateTotalInterest(values) {
             return values.reduce((total, value) => total + value, 0);
         }
@@ -81,6 +138,7 @@
             data.forEach(person => {
                 const row = document.createElement("tr");
                 row.innerHTML = `<td>${person.name}</td>`;
+
                 person.values.forEach(value => {
                     row.innerHTML += `<td>${value}</td>`;
                 });
@@ -88,12 +146,78 @@
                 const totalInterest = calculateTotalInterest(person.values);
                 row.innerHTML += `<td>${totalInterest}</td>`; // Add total interest column
 
+                // Add a verification button to each row
+                if (!person.verified) {
+                    row.innerHTML += `
+                        <td>
+                            <button onclick="verifyDetails('${person.name}', ${totalInterest})">Verify</button>
+                        </td>
+                    `;
+                } else {
+                    row.innerHTML += `<td>Verified</td>`;
+                }
+
                 tableBody.appendChild(row);
             });
         }
 
+        // Function to verify details
+        function verifyDetails(name, totalInterest) {
+            const person = data.find(person => person.name === name);
+
+            if (person.verified) {
+                alert("You have already verified. Goodbye!");
+            } else {
+                const confirmed = confirm("Are your details correct?\nClick OK to confirm or Cancel to send an update request.");
+                
+                if (confirmed) {
+                    alert("Thanks for verifying. This will be your exact interest you will receive.and now can't be change");
+                    person.verified = true; // Mark as verified
+                } else {
+                    alert("Your message has been sent for an update, wait for 24hrs or you can reach us out. Save more earn more🥇.");
+                }
+
+                // Refresh the table
+                document.querySelector("#interestLoanTable tbody").innerHTML = "";
+                createTable();
+            }
+        }
+
         // Call the function to create the table
         createTable();
+
+         // Function to load the profile picture from local storage or set a default
+        function loadProfilePicture() {
+            const profileImage = document.getElementById("profileImage");
+            const savedImage = localStorage.getItem("profileImage");
+
+            if (savedImage) {
+                profileImage.src = savedImage;
+            } else {
+                // Set a default image path if no image is saved
+                profileImage.src = "images/mypict1.png";
+            }
+        }
+
+        // Function to save the uploaded profile picture to local storage
+        function saveProfilePicture(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const profileImage = document.getElementById("profileImage");
+                    profileImage.src = e.target.result;
+
+                    // Save the image data URL in local storage
+                    localStorage.setItem("profileImage", e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Check if a profile picture is already saved in local storage
+        loadProfilePicture();
     </script>
 </body>
 </html>
