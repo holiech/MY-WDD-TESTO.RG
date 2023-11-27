@@ -73,7 +73,7 @@ function draw() {
     ctx.fillRect(food.x * grid, food.y * grid, grid, grid);
 
     // Draw the score
-    ctx.fillStyle = "#333";
+    ctx.fillStyle = "#";
     ctx.font = "20px Arial";
     ctx.fillText("Score: " + score, 10, 30);
 }
