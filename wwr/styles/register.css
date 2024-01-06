@@ -176,3 +176,59 @@
   .register-button:hover {
     background-color: #0056b3;
   }
+
+
+  .slideshow-container {
+    position: relative;
+    width: 100%; /* Default width for larger screens */
+    margin: 0 auto; /* Center the slideshow container */
+  }
+
+  .login-form-container, .create-account-form-container {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    display: none;
+    width: 40%; /* Default width for larger screens */
+  }
+
+  .visible {
+    display: block;
+  }
+
+  /* Responsive styles for small screens */
+  @media only screen and (max-width: 600px) {
+    .slideshow-container {
+      width: 100%;
+    }
+
+    .login-form-container, .create-account-form-container {
+      width: 80%;
+    }
+  }
+
+  /* Responsive styles for medium screens */
+  @media only screen and (min-width: 601px) and (max-width: 1024px) {
+    .slideshow-container {
+      width: 80%;
+    }
+
+    .login-form-container, .create-account-form-container {
+      width: 60%;
+    }
+  }
+
+  /* Responsive styles for large screens */
+  @media only screen and (min-width: 100%) {
+    .slideshow-container {
+      width: 70%;
+    }
+
+    .login-form-container, .create-account-form-container {
+      width: 50%;
+    }
+  }
