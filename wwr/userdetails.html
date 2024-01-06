@@ -1,0 +1,185 @@
+<!-- userdetails.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Details</title>
+  <style>
+    /* Your styles here */
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .user-details {
+      max-width: 700px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .profile-circle {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: #3498db; /* Blue circle color */
+      color: #fff; /* Text color */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    .phone-number,
+    .user-id {
+      margin-bottom: 16px;
+    }
+
+    .input-group {
+      margin-top: 20px;
+    }
+
+    .action-input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+
+    .balance-link,
+    .deposit-link,
+    .loan-link {
+      color: #3498db; /* Blue link color */
+      text-decoration: underline;
+      cursor: pointer;
+      margin-top: 10px;
+      display: block;
+    }
+
+    .balance-link:hover,
+    .deposit-link:hover,
+    .loan-link:hover {
+      color: #21618c; /* Darker blue on hover */
+    }
+
+    .sign-out-button {
+      background-color: #c0392b; /* Red button color */
+      color: #fff; /* Text color */
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .sign-out-button:hover {
+      background-color: #922b21; /* Darker red on hover */
+    }
+  </style>
+</head>
+<body>
+  <div class="user-details" id="userDetails">
+    <!-- User details will be dynamically populated here -->
+  </div>
+  <div class="input-group">
+    <a href="#" class="balance-link" onclick="checkBalance()">Check Balance</a>
+    <a href="#" class="deposit-link" onclick="makeDeposit()">Make a Deposit</a>
+    <a href="#" class="loan-link" onclick="applyLoan()">Apply for a Loan</a>
+    <a href="#" class="loan-link" onclick="applyLoan()">sign out</a>
+    
+
+  </div>
+  <button class="sign-out-button" onclick="signOut()">Delete account</button>
+  <script>
+    function signOut() {
+      // Clear user data from local storage
+      localStorage.clear();
+      // Redirect to the login page after signing out
+      window.location.href = 'login.html';
+    }
+
+    function generateUniqueId() {
+      // Generate a random 8-digit ID
+      return Math.floor(1000 + Math.random() * 9000);
+    }
+
+    function getUserDetails() {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const username = urlParams.get('username');
+
+      // Fetch and display user details
+      const userDetailsContainer = document.getElementById('userDetails');
+      const phoneNumber = localStorage.getItem(`${username}_phoneNumber`);
+      let userId = localStorage.getItem(`${username}_id`);
+
+      // Generate and store a new ID if it doesn't exist
+      if (!userId) {
+        userId = generateUniqueId();
+        localStorage.setItem(`${username}_id`, userId);
+      }
+
+      userDetailsContainer.innerHTML = `
+        <div class="profile-circle">${username.substring(0, 2).toUpperCase()}</div>
+        <h1>Welcome, ${username}!</h1>
+        <div class="user-id">User ID: ${userId}</div>
+        <div class="phone-number">Phone Number: ${phoneNumber}</div>
+      `;
+    }
+
+    function checkBalance() {
+      const username = getUrlParameter('username');
+      const userId = localStorage.getItem(`${username}_id`);
+      const enteredId = prompt('Enter your User ID:');
+      if (enteredId === userId) {
+        alert(`Checking balance for User ID: ${enteredId}`);
+        // Add logic to check balance based on the user ID
+        window.location.href = 'index.html'; // Redirect to balance page
+      } else {
+        alert('Invalid User ID. Access denied.');
+      }
+    }
+
+    function makeDeposit() {
+      const username = getUrlParameter('username');
+      const userId = localStorage.getItem(`${username}_id`);
+      const enteredId = prompt('Enter your User ID:');
+      if (enteredId === userId) {
+        alert(`Making deposit for User ID: ${enteredId}`);
+        // Add logic to make a deposit based on the user ID
+        window.location.href = 'deposit.html'; // Redirect to deposit page
+      } else {
+        alert('Invalid User ID. Access denied.');
+      }
+    }
+
+    function applyLoan() {
+      const username = getUrlParameter('username');
+      const userId = localStorage.getItem(`${username}_id`);
+      const enteredId = prompt('Enter your User ID:');
+      if (enteredId === userId) {
+        alert(`Applying for a loan for User ID: ${enteredId}`);
+        // Add logic to apply for a loan based on the user ID
+        window.location.href = 'loan.html'; // Redirect to loan page
+      } else {
+        alert('Invalid User ID. Access denied.');
+      }
+    }
+
+    function getUrlParameter(name) {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      return urlParams.get(name);
+    }
+
+    // Call the function to fetch and display user details
+    getUserDetails();
+  </script>
+</body>
+</html>

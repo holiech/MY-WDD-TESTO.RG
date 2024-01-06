@@ -1,0 +1,81 @@
+<!-- register.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration for loan</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+      }
+  
+      form {
+        max-width: 500px;
+        margin: 20px auto;
+      }
+  
+      label {
+        display: block;
+        margin-bottom: 8px;
+      }
+  
+      input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 16px;
+      }
+  
+      button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+  
+      button:hover {
+        background-color: #45a049;
+      }
+      h1 {
+        text-align: center;
+      }
+  
+      .error {
+        color: red;
+        margin-bottom: 16px;
+      }
+  </style>
+</head>
+<body>
+  <h1>loan Register</h1>
+  <form id="registrationForm">
+    <label for="regUsername">Username:</label>
+    <input type="text" id="regUsername" required>
+    <label for="regPassword">Password:</label>
+    <input type="password" id="regPassword" required>
+    <label for="regPhoneNumber">Phone Number:</label>
+    <input type="text" id="regPhoneNumber" required>
+    <button type="button" onclick="register()">Register</button>
+    <div id="regError" class="error"></div>
+  </form>
+
+  <script>
+    function register() {
+      const username = document.getElementById('regUsername').value;
+      const password = document.getElementById('regPassword').value;
+      const phoneNumber = document.getElementById('regPhoneNumber').value;
+
+      // Add your registration logic here
+      // For simplicity, storing in local storage (not secure for production)
+      localStorage.setItem(username, password);
+      localStorage.setItem(`${username}_phoneNumber`, phoneNumber);
+
+      // Redirect to login page after registration
+      window.location.href = 'login.html';
+    }
+  </script>
+</body>
+</html>
