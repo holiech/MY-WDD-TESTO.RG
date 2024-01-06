@@ -181,7 +181,7 @@
 </html> -->
 <!-- loan.html -->
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -292,6 +292,146 @@
 
       const phoneNumber = '+254793648810';
       const message = `New Loan Application:\nAmount: $${loanAmount}\nTerm: ${loanTerm} weeks\nInterest Rate: ${interestRate}%`;
+
+      const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+      window.open(whatsappLink, '_blank');
+
+      alert('WhatsApp will open with the loan details. Please send the message to submit the application.');
+    }
+  </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan Application</title>
+  <style>
+    /* Your styles here */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ecf0f1; /* Light gray background color */
+      margin: 0;
+      padding: 0;
+    }
+
+    .loan-container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #3498db; /* Blue heading color */
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      margin-top: 6px;
+      margin-bottom: 12px;
+    }
+
+    button {
+      background-color: #27ae60; /* Green button color */
+      color: #fff; /* Text color */
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #219d54; /* Darker green on hover */
+    }
+
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="loan-container">
+    <h1>Loan Application</h1>
+    <form id="loanForm">
+      <label for="senderName">Your Name:</label>
+      <input type="text" id="senderName" name="senderName" required>
+
+      <label for="loanAmount">Loan Amount (Minimum $500):</label>
+      <input type="number" id="loanAmount" name="loanAmount" min="500" required>
+
+      <label for="loanTerm">Loan Term (weeks):</label>
+      <input type="number" id="loanTerm" name="loanTerm" required>
+
+      <button type="button" onclick="calculateInterest()">Calculate Interest</button>
+
+      <label for="interestRate">Interest Rate (%):</label>
+      <input type="number" id="interestRate" name="interestRate" readonly>
+
+      <div class="result">
+        <p>Calculated Interest: $<span id="calculatedInterest">0.00</span></p>
+      </div>
+
+      <button type="button" onclick="openWhatsApp()">Submit Application</button>
+    </form>
+  </div>
+
+  <script>
+    function calculateInterest() {
+      const senderNameInput = document.getElementById('senderName');
+      const loanAmountInput = document.getElementById('loanAmount');
+      const loanTermInput = document.getElementById('loanTerm');
+      const interestRateInput = document.getElementById('interestRate');
+      const calculatedInterestDisplay = document.getElementById('calculatedInterest');
+
+      const senderName = senderNameInput.value;
+      const loanAmount = parseFloat(loanAmountInput.value);
+      const loanTerm = parseInt(loanTermInput.value);
+      const minimumLoanAmount = 500;
+      const additionalInterestForLongTerm = 30;
+
+      if (loanAmount < minimumLoanAmount) {
+        alert(`Loan amount must be at least $${minimumLoanAmount}.`);
+        return;
+      }
+
+      let baseInterestRate = 20; // 20% base interest rate
+
+      let calculatedInterest = (baseInterestRate / 100) * loanAmount;
+
+      // Add $30 if loan term exceeds 3 weeks
+      if (loanTerm > 3) {
+        calculatedInterest += additionalInterestForLongTerm;
+      }
+
+      interestRateInput.value = baseInterestRate.toFixed(2);
+      calculatedInterestDisplay.textContent = calculatedInterest.toFixed(2);
+    }
+
+    function openWhatsApp() {
+      const senderName = document.getElementById('senderName').value;
+      const loanAmount = document.getElementById('loanAmount').value;
+      const loanTerm = document.getElementById('loanTerm').value;
+      const interestRate = document.getElementById('interestRate').value;
+      const calculatedInterest = document.getElementById('calculatedInterest').textContent;
+
+      const phoneNumber = '+254793648810';
+      const message = `New Loan Application:\nSender: ${senderName}\nAmount: $${loanAmount}\nTerm: ${loanTerm} weeks\nInterest Rate: ${interestRate}%\nCalculated Interest: $${calculatedInterest}`;
 
       const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
       window.open(whatsappLink, '_blank');
