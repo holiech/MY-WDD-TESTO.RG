@@ -210,32 +210,39 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     .hidden {
-      display: none;
-      
-    }
-
-    canvas {
-      max-width: 100%;
-      height: auto;
-    }
-    #legend {
-
-      justify-content: space-around;
-      margin-top: 20px;
-      gap: 10px;
-    }
-
-    .legend-item {
-      display: flex;
-      align-items: center;
-      margin-right: 20px;
-    }
-
-    .legend-color {
-      width: 20px;
-      height: 20px;
-      margin-right: 5px;
-    }
+        display: none;
+      }
+  
+      #legend {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 20px;
+      }
+  
+      .legend-item {
+        display: flex;
+        align-items: center;
+        margin-right: 20px;
+        margin-bottom: 10px;
+      }
+  
+      .legend-color {
+        width: 10px;
+        height: 10px;
+        margin-right: 5px;
+      }
+  
+      canvas {
+        max-width: 100%;
+        height: auto;
+      }
+  
+      @media screen and (max-width: 600px) {
+        .legend-item {
+          margin-right: 10px;
+        }
+      }
   </style>
 </head>
 <body>
@@ -330,19 +337,19 @@
     </div>
     <div class="legend-item">
       <div class="legend-color" style="background-color: #ffbb33;"></div>
-      <div>Orange (501-3000)</div>
+      <div>Orange (<=3000)</div>
     </div>
     <div class="legend-item">
       <div class="legend-color" style="background-color: #ff66b2;"></div>
-      <div>Pink (3001-3500)</div>
+      <div>Pink (<=3500)</div>
     </div>
     <div class="legend-item">
       <div class="legend-color" style="background-color: #66ff66;"></div>
-      <div>Green (3501-4000)</div>
+      <div>Green (<=4000)</div>
     </div>
     <div class="legend-item">
       <div class="legend-color" style="background-color: #3399ff;"></div>
-      <div>Blue (4001-4500)</div>
+      <div>Blue (<=-4500)</div>
     </div>
     <div class="legend-item">
       <div class="legend-color" style="background-color: #c0c0c0;"></div>
@@ -350,7 +357,7 @@
     </div>
     <div class="legend-item">
       <div class="legend-color" style="background-color: #cd7f32;"></div>
-      <div>Silver (5001-5500)</div>
+      <div>Silver (<=5500)</div>
     </div>
     <div class="legend-item">
       <div class="legend-color" style="background-color: #ffd700;"></div>
