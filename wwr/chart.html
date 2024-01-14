@@ -1,0 +1,362 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Graph</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <canvas id="myChart" width="600" height="300"></canvas>
+  </div>
+  <div class="hidden">
+    <label for="contributions">Contributions:</label>
+    <input type="number" id="Odhiabo" value="100" oninput="updateChart()">
+    <input type="number" id="Oliech" value="400" oninput="updateChart()">
+    <input type="number" id="Otieno" value="500" oninput="updateChart()">
+    <input type="number" id="kochiko" value="100" oninput="updateChart()">
+    <input type="number" id="Okoth" value="100" oninput="updateChart()">
+    <input type="number" id="OliechRaila" value="1700" oninput="updateChart()">
+    <input type="number" id="Omwaro" value="300" oninput="updateChart()">
+    <input type="number" id="Amolo" value="900" oninput="updateChart()">
+    <input type="number" id="Aaron" value="100" oninput="updateChart()">
+    <input type="number" id="Odongo" value="100" oninput="updateChart()">
+    <input type="number" id="Magak" value="4000" oninput="updateChart()">
+    <input type="number" id="OkothIsaac" value="100" oninput="updateChart()">
+    <input type="number" id="RichardOchieng" value="50" oninput="updateChart()">
+    <input type="number" id="JulietAkoth" value="0" oninput="updateChart()">
+  </div>
+
+  <script>
+    // Initial data
+    const names = ['Odhiabo', 'Oliech', 'Otieno', 'kochiko', 'Okoth', 'OliechRaila', 'Omwaro', 'Amolo', 'Aaron', 'Odongo', 'Magak', 'OkothIsaac', 'RichardOchieng', 'JulietAkoth'];
+    let contributions = [400, 900, 1500, 1000, 3100, 2500, 300, 900, 100, 100, 1000, 100, 50, 0];
+
+    // Function to update the chart
+    function updateChart() {
+      // Update the chart data
+      for (let i = 0; i < contributions.length; i++) {
+        const name = document.getElementById(names[i]);
+        contributions[i] = parseInt(name.value);
+      }
+
+      myChart.data.datasets[0].data = contributions;
+      myChart.update();
+    }
+
+    // Chart configuration
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: names,
+        datasets: [{
+          label: 'Contributions',
+          data: contributions,
+          backgroundColor: contributions.map(contribution => getColorForContribution(contribution)),
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // Function to get color based on contribution range
+    // Function to get color based on contribution range
+    function getColorForContribution(contribution) {
+        if (contribution >= 0 && contribution <= 500) {
+          return '#ff4444'; // Red
+        } else if (contribution <= 1000) {
+          return '#ffbb33'; // Orange
+        } else if (contribution <= 1500) {
+          return '#ff66b2'; // Pink
+        } else if (contribution <= 2000) {
+          return '#66ff66'; // Green
+        } else if (contribution <= 2500) {
+          return '#3399ff'; // Blue
+        } else {
+          return '#9966ff'; // Purple
+        }
+      }
+  </script>
+</body>
+</html> -->
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Graph</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    .hidden {
+      display: none;
+    }
+
+    #chart-cokntainer {
+      position: relative;
+      width: 100%;
+      max-width: 900px; /* Set a maximum width if needed */
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <div id="chart-container">
+    <canvas id="myChart" width="600" height="300"></canvas>
+  </div>
+  <div class="hidden">
+    <label for="contributions">Contributions:</label>
+    <input type="number" id="Clifford" value="100" oninput="updateChart()">
+    <input type="number" id="Shem" value="800" oninput="updateChart()">
+    <input type="number" id="bornbray" value="500" oninput="updateChart()">
+    <input type="number" id="Samuel" value="100" oninput="updateChart()">
+    <input type="number" id="PeterAT" value="100" oninput="updateChart()">
+    <input type="number" id="Raila" value="700" oninput="updateChart()">
+    <input type="number" id="Peter" value="300" oninput="updateChart()">
+    <input type="number" id="John" value="900" oninput="updateChart()">
+    <input type="number" id="Aaron" value="100" oninput="updateChart()">
+    <input type="number" id="Zaddock" value="100" oninput="updateChart()">
+    <input type="number" id="Magak" value="4000" oninput="updateChart()">
+    <input type="number" id="Isaac" value="100" oninput="updateChart()">
+    <input type="number" id="Richard" value="50" oninput="updateChart()">
+    <input type="number" id="Juliet" value="0" oninput="updateChart()">
+  </div>
+
+  <script>
+    // Initial data
+    const names = ['Odhiabo', 'Oliech', 'Otieno', 'kochiko', 'Okoth', 'OliechRaila', 'Omwaro', 'Amolo', 'Aaron', 'Odongo', 'Magak', 'OkothIsaac', 'RichardOchieng', 'JulietAkoth'];
+    let contributions = [100, 800, 500, 100, 100, 700, 300, 900, 100, 100, 4000, 100, 50, 0];
+
+    // Function to update the chart
+    function updateChart() {
+      // Update the chart data
+      for (let i = 0; i < contributions.length; i++) {
+        const name = document.getElementById(names[i]);
+        contributions[i] = parseInt(name.value);
+      }
+
+      myChart.data.datasets[0].data = contributions;
+      myChart.data.datasets[0].backgroundColor = contributions.map(contribution => getColorForContribution(contribution));
+      myChart.update();
+    }
+
+    // Chart configuration
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: names,
+        datasets: [{
+          label: 'Contributions',
+          data: contributions,
+          backgroundColor: contributions.map(contribution => getColorForContribution(contribution)),
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // Function to get color based on contribution range
+    function getColorForContribution(contribution) {
+      if (contribution >= 0 && contribution <= 500) {
+        return '#ff4444'; // Red
+      } else if (contribution <= 1000) {
+        return '#ffbb33'; // Orange
+      } else if (contribution <= 1500) {
+        return '#ff66b2'; // Pink
+      } else if (contribution <= 2000) {
+        return '#66ff66'; // Green
+      } else if (contribution <= 2500) {
+        return '#3399ff'; // Blue
+      } else {
+        return '#9966ff'; // Purple
+      }
+    }
+  </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Graph</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    .hidden {
+      display: none;
+      
+    }
+
+    canvas {
+      max-width: 100%;
+      height: auto;
+    }
+    #legend {
+
+      justify-content: space-around;
+      margin-top: 20px;
+      gap: 10px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+    }
+
+    .legend-color {
+      width: 20px;
+      height: 20px;
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <canvas id="myChart" width="600" height="300"></canvas>
+  </div>
+  <div class="hidden">
+    <label for="contributions">Contributions:</label>
+    <input type="number" id="Clifford" value="100" oninput="updateChart()">
+    <input type="number" id="Shem" value="800" oninput="updateChart()">
+    <input type="number" id="bornbray" value="500" oninput="updateChart()">
+    <input type="number" id="Samuel" value="100" oninput="updateChart()">
+    <input type="number" id="PeterAT" value="100" oninput="updateChart()">
+    <input type="number" id="Raila" value="700" oninput="updateChart()">
+    <input type="number" id="Peter" value="300" oninput="updateChart()">
+    <input type="number" id="John" value="900" oninput="updateChart()">
+    <input type="number" id="Aaron" value="100" oninput="updateChart()">
+    <input type="number" id="Zaddock" value="100" oninput="updateChart()">
+    <input type="number" id="Magak" value="4000" oninput="updateChart()">
+    <input type="number" id="Isaac" value="100" oninput="updateChart()">
+    <input type="number" id="Richard" value="50" oninput="updateChart()">
+    <input type="number" id="Juliet" value="0" oninput="updateChart()">
+  </div>
+
+  <script>
+    // Initial data
+    const names = ['Clifford', 'Shem', 'bornbray', 'Samuel', 'PeterAT', 'Raila', 'Peter', 'John', 'Aaron', 'Zaddock', 'Magak', 'Isaac', 'Richard', 'Juliet'];
+    let contributions = [0,     0,      0,          0,      100,         0.0,      200,    2000,      0,     0,        0.0,        0,       0,        0];
+
+    // Function to update the chart
+    function updateChart() {
+      // Update the chart data
+      for (let i = 0; i < contributions.length; i++) {
+        const name = document.getElementById(names[i]);
+        contributions[i] = parseInt(name.value);
+      }
+
+      myChart.data.datasets[0].data = contributions;
+      myChart.data.datasets[0].backgroundColor = contributions.map(contribution => getColorForContribution(contribution));
+      myChart.update();
+    }
+
+    // Chart configuration
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: names,
+        datasets: [{
+          label: 'Personal account',
+          data: contributions,
+          backgroundColor: contributions.map(contribution => getColorForContribution(contribution)),
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // Function to get color based on contribution range
+    function getColorForContribution(contribution) {
+      if (contribution >= 0 && contribution <= 1000) {
+        return '#ff4444'; // Red
+      } else if (contribution <= 3000) {
+        return '#ffbb33'; // Orange
+      } else if (contribution <= 3500) {
+        return '#ff66b2'; // Pink
+      } else if (contribution <= 4000) {
+        return '#66ff66'; // Green
+      } else if (contribution <= 4500) {
+        return '#3399ff'; // Blue
+      } else if (contribution <= 5500) {
+        return '#c0c0c0'; // Silver
+      } else if (contribution <= 5000) {
+        return '#cd7f32'; // Bronze
+      } else {
+        return '#ffd700'; // Gold
+      }  
+      
+    }
+  </script>
+  <div id="legend">
+    <div class="legend-item">
+      <div class="legend-color" style="background-color: #ff4444;"></div>
+      <div>Red (<=500)</div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background-color: #ffbb33;"></div>
+      <div>Orange (501-3000)</div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background-color: #ff66b2;"></div>
+      <div>Pink (3001-3500)</div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background-color: #66ff66;"></div>
+      <div>Green (3501-4000)</div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background-color: #3399ff;"></div>
+      <div>Blue (4001-4500)</div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background-color: #c0c0c0;"></div>
+      <div>Bronze (4501-5000)</div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background-color: #cd7f32;"></div>
+      <div>Silver (5001-5500)</div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background-color: #ffd700;"></div>
+      <div>Gold (>5500)</div>
+    </div>
+  </div>
+
+</body>
+</html>
